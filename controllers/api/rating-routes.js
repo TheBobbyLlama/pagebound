@@ -25,10 +25,7 @@ router.get('/book/:id', (req, res) => {
             book_id: req.params.id
         },
         attributes: [
-            'id',
             'book_id',
-            'user_id',
-            'score',
             [
                 sequelize.literal('(SELECT AVG(score) FROM book_rating WHERE book_id = ' + req.params.id + ')'),
                 'average_score'
