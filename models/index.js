@@ -21,7 +21,7 @@ User.belongsToMany(Club, {
 
 Club.belongsToMany(User, {
 	through: ClubMember,
-	as: "clubs",
+	as: "members",
 	foreignKey: "club_id"
 });
 
