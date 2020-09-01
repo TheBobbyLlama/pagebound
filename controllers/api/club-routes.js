@@ -66,12 +66,30 @@ router.post('/', (req, res) => {
             book_id: req.body.book_id,
             owner_id: req.session.user_id,
             owner_username: req.session.username
+        })//Automatically make owner a member of the club
+        .then(dbClubData => {
+            ClubMember.create({
+                user_id: req.session.user_id,
+                club_id: dbClubData.dataValues.id
+            })//Return club data
+            .then(dbClubMemberData => {
+                Club.findOne({
+                    where: {
+                        id: dbClubMemberData.dataValues.club_id
+                    },
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                        as: "members"
+                    } 
+                })
+                .then(dbClubData => res.json(dbClubData))
+                .catch(err => {
+                    console.log(err);
+                    res.status(400).json(err);
+                    });
+            })
         })
-        .then(dbClubData => res.json(dbClubData))
-        .catch(err => {
-        console.log(err);
-        res.status(400).json(err);
-        });
     }
 });
 
@@ -104,7 +122,7 @@ router.put('/:id', (req, res) => {
             id: req.params.id
         }
     })
-    .then(dbUserData => {
+    .then(dbClubData => {
         if (!dbClubData[0]) {
         res.status(404).json({ message: 'No user found with this id' });
         return;
@@ -126,7 +144,7 @@ router.delete('/:id', (req, res) => {
     })
     .then(dbClubData => {
         if (!dbClubData) {
-            res.status(404).json({ message: 'No comment found with this id!' });
+            res.status(404).json({ message: 'No club found with this id!' });
             return;
         }
         res.json(dbClubData);
