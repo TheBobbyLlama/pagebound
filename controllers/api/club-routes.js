@@ -65,7 +65,6 @@ router.post('/', (req, res) => {
             name: req.body.name,
             book_id: req.body.book_id,
             owner_id: req.session.user_id,
-            owner_username: req.session.username
         })//Automatically make owner a member of the club
         .then(dbClubData => {
             ClubMember.create({

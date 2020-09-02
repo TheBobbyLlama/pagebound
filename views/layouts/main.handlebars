@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <title>Pagebound</title>
+</head>
+<body>
+    <div class="top-bar" id="responsive-menu">
+        <div class="top-bar-left">
+            <ul class="dropdown menu" data-dropdown-menu>
+            <li class="menu-text">Pagebound</li>
+            <li class="has-submenu">
+                <a href="#0">My Clubs</a>
+                <ul class="submenu menu vertical" data-submenu>
+                    <li><a href="#0">One</a></li>
+                    <li><a href="#0">Two</a></li>
+                    <li><a href="#0">Three</a></li>
+                </ul>
+            </li>
+            <li><a href="#0">Messages</a></li>
+            <li><a href="#0">Log Out</a></li>
+            <li><a href="#0">Log In</a></li>
+            </ul>
+        </div>
+        <div class="top-bar-right">
+            <ul class="menu">
+            <select>
+                <option value="husker">Husker</option>
+                <option value="starbuck">Starbuck</option>
+                <option value="hotdog">Hot Dog</option>
+                <option value="apollo">Apollo</option>
+            </select>    
+            <li><input type="search" placeholder="Search"></li>
+            <li><button type="button" class="button">Search</button></li>
+            </ul>
+        </div>
+    </div>
+    <main>
+        {{{ body }}}
+    </main>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+</body>
+</html>
