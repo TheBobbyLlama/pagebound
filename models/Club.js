@@ -26,7 +26,7 @@ Club.init(
 		},
 		book_id: {
 			type: DataTypes.STRING
-		}
+        }
 	},
 	{
 		sequelize,
