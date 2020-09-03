@@ -18,7 +18,7 @@ BookRating.init(
 				key: "id"
 			}
 		},
-		book_id: {
+		isbn: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},

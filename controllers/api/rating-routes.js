@@ -6,7 +6,7 @@ const sequelize = require('../../config/connection');
 router.post('/', (req, res) => {
     if (req.session) {
         BookRating.create({
-            book_id: req.body.book_id,
+            isbn: req.body.isbn,
             user_id: req.session.user_id,
             score: req.body.score
         })
@@ -19,30 +19,52 @@ router.post('/', (req, res) => {
 });
 
 //Find ratings for book
-router.get('/book/:id', (req, res) => {
+router.get('/book/:isbn', (req, res) => {
     BookRating.findOne({
         where: {
-            book_id: req.params.id
+            isbn: req.params.isbn
         },
         attributes: [
-            'book_id',
+            'isbn',
             [
-                sequelize.literal('(SELECT AVG(score) FROM book_rating WHERE book_id = ' + req.params.id + ')'),
+                sequelize.literal('(SELECT AVG(score) FROM book_rating WHERE isbn = ' + req.params.isbn + ')'),
                 'average_score'
             ],
             [
-                sequelize.literal('(SELECT COUNT(*) FROM book_rating WHERE book_id = ' + req.params.id + ')'),
+                sequelize.literal('(SELECT COUNT(*) FROM book_rating WHERE isbn = ' + req.params.isbn + ')'),
                 'rating_count'
             ]
         ]
     })
     .then(dbRatingData => {
         if (!dbRatingData) {
-        res.status(404).json({ message: 'No book found with this id' });
+        res.status(404).json({ message: 'No book found with this isbn' });
         return;
         }
         res.json(dbRatingData);
     })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+//Get all ratings
+router.get('/', (req, res) => {
+    BookRating.findAll({
+        attributes: [
+            'isbn',
+            [
+                sequelize.literal('(SELECT AVG(score) FROM book_rating GROUP BY isbn)'),
+                'average_score'
+            ],
+            [
+                sequelize.literal('(SELECT COUNT(*) FROM book_rating GROUP BY isbn)'),
+                'rating_count'
+            ]
+        ]
+    })
+    .then(dbRatingData => res.json(dbRatingData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
@@ -50,43 +72,49 @@ router.get('/book/:id', (req, res) => {
 });
 
 //change rating
-router.put('/:id', (req, res) => {
-    BookRating.update(req.body, {
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbRatingData => {
-        if (!dbRatingData[0]) {
-        res.status(404).json({ message: 'No rating found with this id' });
-        return;
-        }
-        res.json(dbRatingData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+router.put('/:isbn', (req, res) => {
+    if (req.session) {
+        BookRating.update(req.body, {
+            where: {
+                isbn: req.params.isbn,
+                user_id: req.session.user_id
+            }
+        })
+        .then(dbRatingData => {
+            if (!dbRatingData[0]) {
+            res.status(404).json({ message: 'No rating found with this isbn' });
+            return;
+            }
+            res.json(dbRatingData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }
 });
 
 //delete rating
-router.delete('/:id', (req, res) => {
-    BookRating.destroy({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(dbRatingData => {
-        if (!dbRatingData) {
-            res.status(404).json({ message: 'No rating found with this id!' });
-            return;
-        }
-        res.json(dbRatingData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+router.delete('/:isbn', (req, res) => {
+    if (req.session) {
+        BookRating.destroy({
+            where: {
+                isbn: req.params.isbn,
+                user_id: req.session.user_id
+            }
+        })
+        .then(dbRatingData => {
+            if (!dbRatingData) {
+                res.status(404).json({ message: 'No rating found with this isbn!' });
+                return;
+            }
+            res.json(dbRatingData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }
 });
 
 module.exports = router;

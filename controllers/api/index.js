@@ -6,6 +6,6 @@ const ratingRoutes = require('./rating-routes');
 
 router.use('/users', userRoutes);
 router.use('/clubs', clubRoutes);
-router.use('/ratings', ratingRoutes)
+router.use('/ratings', ratingRoutes);
 
 module.exports = router;
