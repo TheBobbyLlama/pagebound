@@ -39,6 +39,11 @@ User.init(
 		zipcode: {
 			type: DataTypes.STRING(5),
 			allowNull: true,
+		},
+		validated: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
 		}
 	},
   	{

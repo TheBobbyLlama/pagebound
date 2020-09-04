@@ -1,16 +1,17 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class BookRating extends Model {}
+class DirectMessage extends Model { }
 
-BookRating.init(
+DirectMessage.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
+			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true
 		},
-		user_id: {
+		sender_id: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			references: {
@@ -18,37 +19,40 @@ BookRating.init(
 				key: "id"
 			}
 		},
-		isbn: {
-			type: DataTypes.STRING(13),
+		recipient_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			references: {
+				model: "user",
+				key: "id"
+			}
+		},
+		subject: {
+			type: DataTypes.STRING,
 			allowNull: false,
 			validate: {
 				notEmpty: true
 			}
 		},
-		score: {
-			type: DataTypes.TINYINT.UNSIGNED,
+		message: {
+			type: DataTypes.STRING(1024),
 			allowNull: false,
-			validate: {
-				isInt: true,
-				min: 0,
-				max: 5
-			}
-		},
-/*		review_text: {
-			type: DataTypes.TEXT,
-			allowNull: true,
 			validate: {
 				notEmpty: true
 			}
-		}*/
+		},
+		read: {
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
+		}
 	},
 	{
 		sequelize,
-		timestamps: false,
 		freezeTableName: true,
 		underscored: true,
-		modelName: "book_rating"
+		modelName: "direct_message"
 	}
 );
 
-module.exports = BookRating;
+module.exports = DirectMessage;

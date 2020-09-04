@@ -19,17 +19,13 @@ Club.init(
 				key: "id"
 			}
 		},
-		owner_username: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		name: {
 			type: DataTypes.STRING,
 			unique: true,
 			allowNull: false
 		},
-		book_id: {
-			type: DataTypes.STRING
+		isbn: {
+			type: DataTypes.STRING(13)
 		}
 	},
 	{

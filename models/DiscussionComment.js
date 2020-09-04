@@ -1,14 +1,23 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class BookRating extends Model {}
+class DiscussionComment extends Model { }
 
-BookRating.init(
+DiscussionComment.init(
 	{
 		id: {
 			type: DataTypes.INTEGER,
+			allowNull: false,
 			primaryKey: true,
 			autoIncrement: true
+		},
+		discussion_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			references: {
+				model: "discussion_topic",
+				key: "id"
+			}
 		},
 		user_id: {
 			type: DataTypes.INTEGER,
@@ -18,37 +27,20 @@ BookRating.init(
 				key: "id"
 			}
 		},
-		isbn: {
-			type: DataTypes.STRING(13),
+		comment_text: {
+			type: DataTypes.STRING(1024),
 			allowNull: false,
 			validate: {
 				notEmpty: true
 			}
-		},
-		score: {
-			type: DataTypes.TINYINT.UNSIGNED,
-			allowNull: false,
-			validate: {
-				isInt: true,
-				min: 0,
-				max: 5
-			}
-		},
-/*		review_text: {
-			type: DataTypes.TEXT,
-			allowNull: true,
-			validate: {
-				notEmpty: true
-			}
-		}*/
+		}
 	},
 	{
 		sequelize,
-		timestamps: false,
 		freezeTableName: true,
 		underscored: true,
-		modelName: "book_rating"
+		modelName: "discussion_comment"
 	}
 );
 
-module.exports = BookRating;
+module.exports = DiscussionComment;

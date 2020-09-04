@@ -2,6 +2,9 @@ const User = require("./User");
 const BookRating = require("./BookRating");
 const Club = require("./Club");
 const ClubMember = require("./ClubMember");
+const DirectMessage = require("./DirectMessage");
+const DiscussionTopic = require("./DiscussionTopic");
+const DiscussionComment = require("./DiscussionComment");
 
 // User to BookRating - one to many
 User.hasMany(BookRating, {
@@ -41,4 +44,48 @@ Club.hasMany(ClubMember, {
 	foreignKey: "club_id"
 });
 
-module.exports = { User, BookRating, Club, ClubMember };
+// User to DirectMessage - one to many (sender) & one to many (recipient)
+User.hasMany(DirectMessage, {
+	foreignKey: "sender_id"
+});
+
+DirectMessage.belongsTo(User, {
+	foreignKey: "sender_id"
+});
+
+User.hasMany(DirectMessage, {
+	foreignKey: "recipient_id"
+});
+
+DirectMessage.belongsTo(User, {
+	foreignKey: "recipient_id"
+});
+
+// Club to Discussion - one to many
+Club.hasMany(DiscussionTopic, {
+	foreignKey: "club_id"
+});
+
+DiscussionTopic.belongsTo(Club, {
+	foreignKey: "club_id",
+});
+
+// Discussion to Comment - one to many
+DiscussionTopic.hasMany(DiscussionComment, {
+	foreignKey: "discussion_id"
+});
+
+DiscussionComment.belongsTo(DiscussionTopic, {
+	foreignKey: "discussion_id",
+});
+
+// User to Comment - one to many
+User.hasMany(DiscussionComment, {
+	foreignKey: "user_id"
+});
+
+DiscussionComment.belongsTo(User, {
+	foreignKey: "user_id",
+});
+
+module.exports = { User, BookRating, Club, ClubMember, DirectMessage, DiscussionTopic, DiscussionComment };
