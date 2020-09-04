@@ -2,12 +2,13 @@ async function searchClickHandler() {
     const param = $('#book-search-select').val();
     const query = $('#book-search-input').val().toLowerCase().split(' ').join('+');
 
-    $('#search-results').html('');
+    $('#search-results').html(`<div style="text-align: center;"><img src="images/working.gif" /></div>`);
 
     const response = await fetch('http://openlibrary.org/search.json?' + param + '=' + query);
 
     if (response.ok) {
-        const data = await response.json()
+        const data = await response.json();
+
         //I guess in a few cases there is no ISBN. This only seems to happen w duplicates or really obscure books, so we'll just eliminate them for now.
         const results = data.docs.filter(result => result.isbn);
   
@@ -15,6 +16,8 @@ async function searchClickHandler() {
             await checkForRatings(result);
             return result;
         }));
+
+        $('#search-results').empty();
 
         $(ratedResults).each(function() {
             const info = $(this)[0];
@@ -24,7 +27,7 @@ async function searchClickHandler() {
             <ol>
             <li class="list-group-item flex-container align-top">
                 <div style="margin-right: 25px; margin-top: 10px; flex: 0 0 auto; height: 250px; width: 200px;">
-                    <img src="http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg" alt="" style="height: 250px; width: auto;">
+                    <img src="images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
                 </div>
                 <div class="flex-container align-self-stretch" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
                     <div>
