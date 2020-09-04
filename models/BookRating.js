@@ -19,11 +19,16 @@ BookRating.init(
 			}
 		},
 		isbn: {
+<<<<<<< HEAD
 			type: DataTypes.STRING(13),
 			allowNull: false,
 			validate: {
 				notEmpty: true
 			}
+=======
+			type: DataTypes.STRING,
+			allowNull: false
+>>>>>>> feature/searchbar
 		},
 		score: {
 			type: DataTypes.TINYINT.UNSIGNED,
