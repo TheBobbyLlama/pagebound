@@ -1,11 +1,13 @@
 async function loginFormHandler(event) {
     event.preventDefault();
 
-    const username = document.querySelector('#username-login').value.trim();
+    const email = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
+    
+    $('#email-alert').addClass('hide');
+    $('#password-alert').addClass('hide');
 
-
-    if (username && password) {
+    if (email && password) {
         const response = await fetch('/api/users/login', {
             method: 'post',
             body: JSON.stringify({
@@ -16,10 +18,15 @@ async function loginFormHandler(event) {
         })
 
         if (response.ok) {
-            //TODO where are we going with this, dashboard again?
             document.location.replace('/dashboard');
         } else {
-            alert(response.statusText);
+            const error = await response.json()
+
+            if (error.message = "No user with that email address!") {
+                $('#email-alert').removeClass('hide');
+            } else if (error.message = 'Incorrect password!') {
+                $('#password-alert').removeClass('hide');
+            }
         }
     }
 }

@@ -1,0 +1,24 @@
+/* password match styles */
+.passwords-match-false {
+    border-color: red;
+}
+.passwords-match-false:focus {
+    border-color: red;
+}
+
+.passwords-match-true {
+    border-color: green;
+}
+.passwords-match-true:focus {
+    border-color: green;
+}
+/* password match styles end */
+
+/* blank field styles */
+.blank-field {
+    border-color: red;
+}
+.blank-field:focus {
+    border-color: red;
+}
+/* blank field styles end */
