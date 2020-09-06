@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
     if (req.session) {
         Club.create({
             name: req.body.name,
-            book_id: req.body.book_id,
+            isbn: req.body.isbn,
             owner_id: req.session.user_id,
         })//Automatically make owner a member of the club
         .then(dbClubData => {
@@ -123,7 +123,7 @@ router.put('/:id', (req, res) => {
     })
     .then(dbClubData => {
         if (!dbClubData[0]) {
-        res.status(404).json({ message: 'No user found with this id' });
+        res.status(404).json({ message: 'No club found with this id' });
         return;
         }
         res.json(dbClubData);
