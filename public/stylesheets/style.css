@@ -23,13 +23,19 @@
 }
 /* blank field styles end */
 
+.menu-text {
+    margin-left: 60px;
+    position: relative;
+    vertical-align: center;
+}
+
 .menu-text::before {
 	background-image: url('../images/logo-sm.png');
 	background-size: cover;
 	content: '';
 	display: inline-block;
-	position: relative;
-	height: 16px;
-	left: -8px;
-	width: 40px;
+	position: absolute;
+	height: 24px;
+	left: -54px;
+	width: 60px;
 }
