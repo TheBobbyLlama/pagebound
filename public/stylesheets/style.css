@@ -22,3 +22,14 @@
     border-color: red;
 }
 /* blank field styles end */
+
+.menu-text::before {
+	background-image: url('../images/logo-sm.png');
+	background-size: cover;
+	content: '';
+	display: inline-block;
+	position: relative;
+	height: 16px;
+	left: -8px;
+	width: 40px;
+}
