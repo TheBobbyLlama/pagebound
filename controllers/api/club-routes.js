@@ -65,7 +65,12 @@ router.post('/', (req, res) => {
             name: req.body.name,
             isbn: req.body.isbn,
             owner_id: req.session.user_id,
-        })//Automatically make owner a member of the club
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+        //Automatically make owner a member of the club
         .then(dbClubData => {
             ClubMember.create({
                 user_id: req.session.user_id,
@@ -85,8 +90,8 @@ router.post('/', (req, res) => {
                 .then(dbClubData => res.json(dbClubData))
                 .catch(err => {
                     console.log(err);
-                    res.status(400).json(err);
-                    });
+                    res.status(500).json(err);
+                });
             })
         })
     }
