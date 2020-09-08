@@ -11,18 +11,14 @@ async function searchClickHandler() {
 
         //I guess in a few cases there is no ISBN. This only seems to happen w duplicates or really obscure books, so we'll just eliminate them for now.
         const results = data.docs.filter(result => result.isbn);
-  
-        const ratedResults = await Promise.all(results.map(async (result) => {
-            await checkForRatings(result);
-            return result;
-        }));
+
+        // This will append ratings to the book items, if applicable.
+        await getBookRatings(results);
 
         $('#search-results').empty();
 
-        $(ratedResults).each(function() {
-            const info = $(this)[0];
+        results.forEach(info => {
             const url = info.title.toLowerCase().split(' ').join('+');
-            console.log(info);
             $('#search-results').append(`
             <ol>
             <li class="list-group-item flex-container align-top">
@@ -35,12 +31,12 @@ async function searchClickHandler() {
                             ${info.title}
                         </strong>
                         <br>
-                        ${(() => { if (info.rating) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
+                        ${(() => { if (info.author_name) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
                         <br>
                         <a href="https://www.amazon.com/s?k=${url}&i=stripbooks">Find on Amazon</a>
                     </div>
                     <div>
-                        ${(() => { if (info.rating) { return `<p>Rated <strong>${info.rating.average_score}</strong> by <strong>${info.rating.rating_count}</strong> users</p>`} else { return ``}})()}
+                        ${(() => { if (info.pagebound_rating_count) { return `<p>Rated <strong>${info.pagebound_rating_average}</strong> by <strong>${info.pagebound_rating_count}</strong> users</p>`} else { return ``}})()}
                         <div class="flex-container">
                             <button type="button" class="button small" style="margin-right: 10px;" id="book-page">Go to Book Page</button>
                             <button type="button" class="success button small" id="add-to-club">Add Book to Club</button>
@@ -54,19 +50,25 @@ async function searchClickHandler() {
     }  
 };
 
-async function checkForRatings(result) {
-   const response = await fetch('/api/ratings');
+// Appends rating info to each book entry.
+async function getBookRatings(results) {
+    const response = await fetch('/api/ratings/forlist', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ isbns: results.map(element => element.isbn[0])})
+    });
 
-   if (response.ok) {
+    if (response.ok) {
         const data = await response.json();
-        $(data).each(function() {
-            if ($(this)[0].isbn === result.isbn[0]) {
-                result.rating = $(this)[0];
-            } else {
-                return result;
+        for (let i = 0; i < data.length; i++) {
+            let curBook = results.find(book => book.isbn[0] === data[i].isbn);
+
+            if (curBook) {
+                curBook.pagebound_rating_average = data[i].average_score;
+                curBook.pagebound_rating_count = data[i].rating_count;
             }
-        });
-    }      
-};
+        }
+    }
+}
 
 $('#book-search-submit').click(searchClickHandler);

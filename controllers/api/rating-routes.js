@@ -26,15 +26,10 @@ router.get('/book/:isbn', (req, res) => {
         },
         attributes: [
             'isbn',
-            [
-                sequelize.literal('(SELECT AVG(score) FROM book_rating WHERE isbn = ' + req.params.isbn + ')'),
-                'average_score'
-            ],
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM book_rating WHERE isbn = ' + req.params.isbn + ')'),
-                'rating_count'
-            ]
-        ]
+            [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
+            [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
+        ],
+        group: 'isbn'
     })
     .then(dbRatingData => {
         if (!dbRatingData) {
@@ -49,20 +44,35 @@ router.get('/book/:isbn', (req, res) => {
     });
 });
 
+// Find ratings for an array of books.
+router.post('/forlist', (req, res) => {
+    BookRating.findAll({
+        attributes: [
+            'isbn',
+            [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
+            [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
+        ],
+        group: 'isbn',
+        where: {
+            isbn: req.body.isbns
+        }
+    })
+    .then(dbRatingData => res.json(dbRatingData))
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 //Get all ratings
 router.get('/', (req, res) => {
     BookRating.findAll({
         attributes: [
             'isbn',
-            [
-                sequelize.literal('(SELECT AVG(score) FROM book_rating GROUP BY isbn)'),
-                'average_score'
-            ],
-            [
-                sequelize.literal('(SELECT COUNT(*) FROM book_rating GROUP BY isbn)'),
-                'rating_count'
-            ]
-        ]
+            [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
+            [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
+        ],
+        group: 'isbn'
     })
     .then(dbRatingData => res.json(dbRatingData))
     .catch(err => {
