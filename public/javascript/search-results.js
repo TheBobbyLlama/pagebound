@@ -32,7 +32,7 @@ async function searchClickHandler() {
                             ${info.title}
                         </strong>
                         <br>
-                        ${(() => { if (info.rating) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
+                        ${(() => { if (info.author_name) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
                         <br>
                         <a href="https://www.amazon.com/s?k=${url}&i=stripbooks">Find on Amazon</a>
                     </div>
