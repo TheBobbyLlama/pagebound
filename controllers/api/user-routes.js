@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { BookRating, ClubMember, Club, User } = require('../../models')
+const transporter = require('../../util/email.js');
+const {generateEmailText, generateEmailBody} = require('../../src/verificationEmailTemplate');
+const { BookRating, ClubMember, Club, User, UserVerification } = require('../../models');
 
 //get all users
 router.get('/', (req, res) => {
@@ -82,13 +84,22 @@ router.post('/', (req, res) => {
         zipcode: req.body.zipcode
     })
         .then(dbUserData => {
-            req.session.save(() => {
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
-            req.session.loggedIn = true;
-            req.session.zipcode = dbUserData.zipcode;
-        
-            res.json(dbUserData);
+            UserVerification.create({
+                user_id: dbUserData.id,
+                token: generateToken()
+            })
+                .then(dbVerificationData => {
+                    const referral = req.headers.origin + '/validate/' + dbUserData.id + '/' + dbVerificationData.token;
+
+                    transporter.sendMail({
+                        from: 'Pagebound <pagebound.bootcamp@gmail.com>',
+                        to: [ dbUserData.email ],
+                        subject: 'Welcome to Pagebound!  Please verify your email address.',
+                        text: generateEmailText(dbUserData.username, referral),
+                        html: generateEmailBody(dbUserData.username, referral)
+                    }, function() {});
+
+                    res.json(dbUserData);
             });
         })
         .catch(err => {
@@ -106,6 +117,11 @@ router.post('/login', (req, res) => {
     }).then(dbUserData => {
         if (!dbUserData) {
             res.status(400).json({ message: 'No user with that email address!' });
+            return;
+        }
+
+        if (!dbUserData.validated) {
+            res.status(401).json({ message: 'You must verify your email address before you can log in.'});
             return;
         }
     
@@ -159,5 +175,16 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
+
+const generateToken = function() {
+    const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    
+    for (let i = 0; i < 16; i++) {
+        result += characters.charAt(Math.floor(characters.length * Math.random()));
+    }
+
+    return result;
+}
 
 module.exports = router;

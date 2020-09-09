@@ -5,6 +5,7 @@ const ClubMember = require("./ClubMember");
 const DirectMessage = require("./DirectMessage");
 const DiscussionTopic = require("./DiscussionTopic");
 const DiscussionComment = require("./DiscussionComment");
+const UserVerification = require("./UserVerification");
 
 // User to BookRating - one to many
 User.hasMany(BookRating, {
@@ -88,4 +89,13 @@ DiscussionComment.belongsTo(User, {
 	foreignKey: "user_id",
 });
 
-module.exports = { User, BookRating, Club, ClubMember, DirectMessage, DiscussionTopic, DiscussionComment };
+// User to UserVerification - one to one
+User.hasOne(UserVerification, {
+	foreignKey: "user_id"
+});
+
+UserVerification.belongsTo(User, {
+	foreignKey: "user_id",
+});
+
+module.exports = { User, BookRating, Club, ClubMember, DirectMessage, DiscussionTopic, DiscussionComment, UserVerification };

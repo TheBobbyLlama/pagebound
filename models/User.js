@@ -1,6 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 const bcrypt = require("bcrypt");
+const { UserVerification } = require(".");
+//const { afterCreate } = require("./BookRating");
 
 class User extends Model {
 	checkPassword(loginPw) {
@@ -53,7 +55,10 @@ User.init(
 			return newUserData;
 		},
 		async beforeUpdate(updatedUserData) {
-			updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+			if (updatedUserData._changed.has('password')) {
+				updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+			}
+
 			return updatedUserData;
 		}
 	},

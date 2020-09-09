@@ -22,9 +22,9 @@ async function loginFormHandler(event) {
         } else {
             const error = await response.json()
 
-            if (error.message = "No user with that email address!") {
+            if (error.message == "No user with that email address!") {
                 $('#email-alert').removeClass('hide');
-            } else if (error.message = 'Incorrect password!') {
+            } else if (error.message == 'Incorrect password!') {
                 $('#password-alert').removeClass('hide');
             }
         }
