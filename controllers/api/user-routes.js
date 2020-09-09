@@ -74,7 +74,9 @@ router.post('/', (req, res) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        zipcode: req.body.zipcode
+        zipcode: req.body.zipcode,
+        notify_new_discussion_comment: true,
+        notify_message: true
     })
         .then(dbUserData => {
             UserVerification.create({

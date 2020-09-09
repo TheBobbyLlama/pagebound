@@ -46,7 +46,17 @@ User.init(
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false
-		}
+        },
+        notify_message:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
+        },
+        notify_new_discussion_comment:{
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true
+        }
 	},
   	{
 	hooks: {
