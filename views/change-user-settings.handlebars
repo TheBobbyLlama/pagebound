@@ -1,0 +1,29 @@
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center align-middle" style="height: 90vh;">
+        <div class="cell small-12 large-6 card" style="margin-top: 1rem;">
+            <div class="card-divider">Account Settings</div>
+            <div class="card-section">
+                <form id="user-settings-form">
+                    <h4>Notification Settings</h4>
+                    <fieldset class="large-5 cell">
+                        <legend>Notify on Direct Message</legend>
+                        <input type="radio" name="email-dm" value="No" id="dm-no" required><label for="dm-no">No</label>
+                        <input type="radio" name="email-dm" value="Yes" id="dm-yes"><label for="dm-yes">Yes</label>
+                    </fieldset>
+                    <fieldset class="large-5 cell">
+                        <legend>Notify on New Discussion Comment</legend>
+                        <input type="radio" name="email-comment" value="No" id="comment-no" required><label for="comment-no">No</label>
+                        <input type="radio" name="email-comment" value="Yes" id="comment-yes"><label for="comment-yes">Yes</label>
+                    </fieldset>
+                    <div class="flex-container align-middle">
+                        <button class="button" style="margin-right: 5px;">Reset Password</button>
+                    </div>
+                    <div class="flex-container align-middle">
+                        <button type="submit" class="button" style="margin-right: 5px;">Update!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascript/change-user-settings.js"></script>
