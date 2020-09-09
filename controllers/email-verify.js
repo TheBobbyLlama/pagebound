@@ -20,8 +20,13 @@ router.get('/:id/:token', async (req, res) => {
 		  ]
 	})
 	.then(dbUserVerificationData => {
-		const dataToken = dbUserVerificationData.get({plain: true}).user_verification.token;
-		console.log(dataToken);
+		const plainData = dbUserVerificationData.get({plain: true});
+
+		if ((!plainData.user_verification) || (!plainData.user_verification.token)) {
+			res.redirect('/');
+			return;
+		}
+		const dataToken = plainData.user_verification.token;
 
 		if (req.params.token === dataToken) {
 			req.session.save(() => {
@@ -47,9 +52,8 @@ router.get('/:id/:token', async (req, res) => {
 		}
 	})
 	.catch(err => {
-		// TODO - Proper error page!
 		console.log(err);
-		res.status(500).json(err);
+		res.render('error', { message: err });
 	});
 });
 

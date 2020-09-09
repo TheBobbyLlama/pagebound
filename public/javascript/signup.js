@@ -30,6 +30,9 @@ async function signupFormHandler(event) {
             })
             if (response.ok) {
                 console.log('success');
+                $('#signup-form input').attr('disabled', 'true');
+                $('#signup-form > *').addClass('hide');
+                $('#signup_success').removeClass('hide');
             } else {
                 const error = await response.json()
                 console.log(error);
