@@ -21,9 +21,9 @@ async function searchClickHandler() {
             const url = info.title.toLowerCase().split(' ').join('+');
             $('#search-results').append(`
             <ol>
-            <li class="list-group-item flex-container align-top">
+            <li class="flex-container align-top">
                 <div style="margin-right: 25px; margin-top: 10px; flex: 0 0 auto; height: 250px; width: 200px;">
-                    <img src="images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
+                    <img src="images/cover-loading.gif" alt="" style="max-height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
                 </div>
                 <div class="flex-container align-self-stretch" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
                     <div>
