@@ -1,31 +1,33 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  if (!req.session.loggedIn) {
-    res.render('login', {
+  if (req.session.loggedIn) {
+    res.render('dashboard', {
         loggedIn: req.session.loggedIn
     });
   } else {
-    res.render('dashboard', {
+    res.render('login', {
         loggedIn: req.session.loggedIn
     });
   }
 });
 
-router.get('/signup', (req, res) => {
-    res.render('signup', {
+router.get('/club-search', (req, res) => {
+    res.render('club-search', {
         loggedIn: req.session.loggedIn
     });
+});
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+    res.render('signup');
 });
 
 router.get('/create-club', (req, res) => {
     res.render('create-club', {
-        loggedIn: req.session.loggedIn
-    });
-});
-
-router.get('/dashboard', (req, res) => {
-    res.render('dashboard', {
         loggedIn: req.session.loggedIn
     });
 });

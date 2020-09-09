@@ -1,6 +1,8 @@
 //where we will store isbn if book is chosen
 let bookIsbn = null;
+//store user info from user search dropdown 
 const userSearchHolder = [];
+//user info chosen from ^
 const userAddArray = [];
 
 async function createClubFormHandler(event) {
@@ -167,6 +169,7 @@ function bookRemoveHandler() {
     $('#add-a-book-plus-sign').removeClass('hide');
 };
 
+//user search returns closest results each input
 async function searchUserHandler() { 
     $('#add-user-dropdown').addClass('hide'); 
     const search = $('#add-club-user-input').val().toLowerCase()
@@ -182,7 +185,7 @@ async function searchUserHandler() {
 
     if (response.ok) {
         const results = await response.json()
-        $('#add-user-dropdown').removeClass('hide');
+
         $('#add-user-dropdown-list').html('');
         $(results).each(function() {
             userSearchHolder.push($(this)[0])
@@ -195,9 +198,14 @@ async function searchUserHandler() {
             </li>
             `);
         });
+
+        if (userSearchHolder.length > 0) {
+            $('#add-user-dropdown').removeClass('hide');
+        }
     }
 };
 
+//adds user from dropdown list to visual list and add user array
 function addUserHandler(event) {
     const listEl = event.target.closest('li');
     const username = listEl.querySelector('strong').innerHTML.trim();
@@ -225,12 +233,15 @@ function addUserHandler(event) {
     })
 };
 
+//remove user from add to club list
 function removeUserHandler() {
     const listEl = this.closest('li')
     const username = listEl.querySelector('p').innerHTML.trim();
 
+    //remove from visual list
     $(listEl).remove();
 
+    //loop through user add array and take out user at matching username
     $(userAddArray).each(function(index) {
         const thisUsername = $(this)[0].username;
         if (username === thisUsername) {
@@ -238,13 +249,18 @@ function removeUserHandler() {
         }
     });
 
+    //hide the visual list container if no users
     if (userAddArray.length === 0) {
         $('#selected-user-list').addClass('hide'); 
     }
 }; 
 
+//add selected users to club
 async function addUsersToClub(clubInfo) {
+    //info returned by club post route
     const clubId = clubInfo.id
+
+    //add each user in add array to club
     for (let index = 0; index < userAddArray.length; index++) {
         const userId = userAddArray[index].id
         console.log(userId);
@@ -262,8 +278,9 @@ async function addUsersToClub(clubInfo) {
     }
 };
 
-document.querySelector('#book-add-input').addEventListener('input', searchInputHandler);
-document.querySelector('#create-club-form').addEventListener('submit', createClubFormHandler);
+$('#book-add-input').on('input', searchInputHandler);
+$('#book-add-input').on('focus', () => $('#add-user-dropdown').foundation('open'));
+$('#create-club-form').on('submit', createClubFormHandler);
 $('#selected-user-list').on('click', 'button.user-close', removeUserHandler);
 $('#add-user-dropdown').on('click', 'li.list-group-item', addUserHandler);
 $('#add-club-user-input').on('input',  searchUserHandler);

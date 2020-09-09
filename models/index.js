@@ -18,7 +18,7 @@ BookRating.belongsTo(User, {
 // User to Club - many to many through ClubMember
 User.belongsToMany(Club, {
 	through: ClubMember,
-	as: "members",
+	as: "clubs",
 	foreignKey: "user_id"
 });
 

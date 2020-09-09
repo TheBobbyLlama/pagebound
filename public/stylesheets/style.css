@@ -27,7 +27,6 @@
     border-color: red;
 }
 /* blank field styles end */
-<<<<<<< HEAD
 
 .menu-text {
     margin-left: 60px;
@@ -45,7 +44,6 @@
 	left: -54px;
 	width: 60px;
 }
-=======
 /* SIGNUP STYLES END*/
 
 /* searchbar styles */
@@ -318,4 +316,3 @@
   .foundicon-search:before {
     content: "\f02e";
   }
->>>>>>> feature/views
