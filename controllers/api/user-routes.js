@@ -2,6 +2,7 @@ const router = require('express').Router();
 const transporter = require('../../util/email.js');
 const {generateEmailText, generateEmailBody} = require('../../src/verificationEmailTemplate');
 const { BookRating, ClubMember, Club, User, UserVerification } = require('../../models');
+const { Op } = require("sequelize");
 
 //get all users
 router.get('/', (req, res) => {
@@ -16,25 +17,17 @@ router.get('/', (req, res) => {
 });
 
 //search user by username
-router.get('/', (req, res) => {
-    let lookupValue = req.body.query.toLowerCase();
+router.get('/search', (req, res) => {
+    let lookupValue = req.query.name
+    console.log(lookupValue);
     User.findAll({
         limit: 20,
         attributes: { exclude: ['password'] },
         where: {
-            username: sequelize.where(sequelize.fn('LOWER', sequelize.col('username')), 'LIKE', '%' + lookupValue + '%')
-        },
-        include: [
-            {
-                model: Club,
-                attributes: ['name'],
-                as: 'clubs'
-            },
-            {
-                model: BookRating,
-                attributes: ['id', 'user_id', 'book_id', 'score']
+            username: {
+                [Op.like]: lookupValue + '%'
             }
-        ]
+        }
     })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
