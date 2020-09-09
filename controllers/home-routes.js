@@ -23,4 +23,11 @@ router.get('/results', (req, res) => {
         loggedIn: req.session.loggedIn
     });
 });
+
+router.get('/change-user-settings', (req, res) => {
+    res.render('change-user-settings', {
+        loggedIn: req.session.loggedIn
+    });
+});
+
 module.exports = router;
