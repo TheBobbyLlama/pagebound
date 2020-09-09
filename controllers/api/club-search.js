@@ -5,9 +5,8 @@ const sequelize = require('../../config/connection');
 const { Op } = require('sequelize');
 const { User, ClubMember, Club } = require('../../models')
 
-router.get('/', (req, res) => {
-    async function returnData() {
-        const zipcode = req.session.zipcode;
+router.get('/', async (req, res) => {
+        const zipcode = req.query.zip || req.session.zipcode;
         const dist = req.query.dist;
         let nearbyZIPs =[];
         console.log(zipcode, dist);
@@ -30,31 +29,29 @@ router.get('/', (req, res) => {
                 console.log("here are the zip codes near " + zipcode.toString() + ":");
                 console.log(nearbyZIPs);
 
-                const response = await Club.findAll({
+                Club.findAll({
                     include: {
                         model: User,
                         as: "members",
+                        attributes: { exclude: ['password'] },
                         where: {
                             zipcode: {
                                 [Op.or]: nearbyZIPs
                             }
                         }
                     }
-                });
-
-                if (response.ok) {
-                    if (!response.length) {
-                        console.log(err);
-                        res.status(404).json(err);
-                        return;
+                }).then(dbClubData => {
+                    if (!dbClubData) {
+                    res.status(404).json({ message: 'No clubs within this range' });
+                    return;
                     }
-                    res.json(response);
-                } else {
+                    res.json(dbClubData);
+                })
+                .catch(err => {
                     console.log(err);
                     res.status(500).json(err);
-                }    
+                });   
         }
-    }
 });
 
 module.exports = router;

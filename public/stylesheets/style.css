@@ -56,6 +56,44 @@
 }
 /* searchbar styles end */
 
+/* club search styles */
+#zip-distance {
+  margin: 0 1rem 0 1rem;
+}
+
+.club-result-title {
+  background-color: #1779ba;
+  color: white;
+}
+
+#zip-search-results {
+  border-color: #1779ba;
+}
+
+.club-search-item {
+  border-color: #1779ba;
+}
+
+.club-search-card {
+  border: none;
+}
+
+.book-section {
+  background:#e6e6e6;
+  padding: .3rem 1.5rem 1rem 1rem;
+}
+
+.club-card-section {
+  padding: 0;
+}
+
+.group-page-button {
+  margin: 1rem;
+}
+
+
+
+
 /* list group style */
 .list-group {
     margin: none !important;
