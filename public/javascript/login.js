@@ -4,8 +4,7 @@ async function loginFormHandler(event) {
     const email = document.querySelector('#username-login').value.trim();
     const password = document.querySelector('#password-login').value.trim();
     
-    $('#email-alert').addClass('hide');
-    $('#password-alert').addClass('hide');
+    $('#credential-alert, #verify-alert').addClass('hide');
 
     if (email && password) {
         const response = await fetch('/api/users/login', {
@@ -20,12 +19,12 @@ async function loginFormHandler(event) {
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            const error = await response.json()
+            const error = await response.json();
 
-            if (error.message == "No user with that email address!") {
-                $('#email-alert').removeClass('hide');
-            } else if (error.message == 'Incorrect password!') {
-                $('#password-alert').removeClass('hide');
+            if (error.message.indexOf('credentials') > -1) {
+                $('#credential-alert').removeClass('hide');
+            } else if (error.message.indexOf('verify') > -1) {
+                $('#verify-alert').removeClass('hide');
             }
         }
     }
