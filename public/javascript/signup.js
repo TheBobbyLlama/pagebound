@@ -29,8 +29,6 @@ async function signupFormHandler(event) {
                 headers: { 'Content-Type': 'application/json' }
             })
             if (response.ok) {
-                document.location.replace('/dashboard');
-                console.log('success');
                 $('#signup-form input').attr('disabled', 'true');
                 $('#signup-form > *').addClass('hide');
                 $('#signup_success').removeClass('hide');
