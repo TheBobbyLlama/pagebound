@@ -109,19 +109,19 @@ router.post('/login', (req, res) => {
       }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
+            res.status(400).json({ message: 'Incorrect credentials!' });
+            return;
+        }
+
+        const validPassword = dbUserData.checkPassword(req.body.password);
+    
+        if (!validPassword) {
+            res.status(400).json({ message: 'Incorrect credentials!' });
             return;
         }
 
         if (!dbUserData.validated) {
-            res.status(401).json({ message: 'You must verify your email address before you can log in.'});
-            return;
-        }
-    
-        const validPassword = dbUserData.checkPassword(req.body.password);
-    
-        if (!validPassword) {
-            res.status(400).json({ message: 'Incorrect password!' });
+            res.status(401).json({ message: 'You must verify your email address before you can log in.' });
             return;
         }
     
