@@ -117,6 +117,8 @@ ul.menu, .top-bar {
 
 #book-search-select, #book-add-select {
   border-radius: 7px 0 0 7px !important;
+  background-color: #f8faff;
+    color: var(--pagebound-blue);
 }
 
 #book-search-submit {
@@ -181,6 +183,11 @@ ul.menu, .top-bar {
 }
 
 .dashboard-menu .button {
+  background-color: var(--background-light);
+  border-radius: 0 !important;
+}
+
+.dashboard-menu .button:hover {
   background-color: var(--background-light);
   border-radius: 0 !important;
 }
