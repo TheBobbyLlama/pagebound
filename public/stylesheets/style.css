@@ -224,6 +224,16 @@
 }
 /* list group style end */
 
+/* book page styles */
+#cover_panel {
+  background-image: url('../images/cover-loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* book page styles end */
+
 /* font-face */
 @font-face {
     font-family: "GeneralFoundicons";

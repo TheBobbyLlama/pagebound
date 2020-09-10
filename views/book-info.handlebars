@@ -1,0 +1,36 @@
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center align-middle" style="height: 90vh;">
+        <div class="cell small-12 large-10 card" style="height: 600px; margin-top: 1rem;">
+            <div class="card-divider grid-x grid-margin-x">
+				<div class="cell small-10">
+					<h2 id="book_title">{{title}}</h2>
+				</div>
+				<div id="book_rating" class="cell small-2">
+				</div>
+			</div>
+            <div class="card-section grid-x grid-margin-x">
+				<div id="cover_panel" class="cell small-12 large-4">
+				</div>
+				<div class="cell small-12 large-8 grid-y">
+					<div class="cell">
+						<p id="author_info"></p>
+					</div>
+					<div class="cell small-10">
+						<p id="book_desription">Description</p>
+					</div>
+					<div class="cell grid-x grid-margin-x">
+						<div class="cell small-6">
+							<a href="https://www.amazon.com/s?k={{amazonUrl}}&i=stripbooks">Find on Amazon</a>
+						</div>
+						{{#if clubOwner}}
+						<div class="cell small-6">
+							<button type="button" class="success button small" id="add-to-club" data-isbn="{{isbn}}">Add Book to Club</button>
+						</div>
+						{{/if}}
+					</div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascript/book-info.js"></script>

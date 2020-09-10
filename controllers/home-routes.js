@@ -42,6 +42,21 @@ router.get('/results', (req, res) => {
 
 router.get('/change-user-settings', (req, res) => {
     res.render('change-user-settings', {
+                loggedIn: req.session.loggedIn
+    });
+});
+
+router.get('/book/:title/isbn/:isbn', (req, res) => {
+    res.render('book-info', {
+        loggedIn: req.session.loggedIn,
+        title: req.params.title,
+        isbn: req.params.isbn,
+        amazonUrl: req.params.title.toLowerCase().split(' ').join('+')
+    });
+});
+
+router.get('/results', (req, res) => {
+    res.render('results', {
         loggedIn: req.session.loggedIn
     });
 });
