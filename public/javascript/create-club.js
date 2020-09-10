@@ -69,7 +69,7 @@ async function searchInputResults() {
 
     $('#book-add-results').html(`<div style="text-align: center;"><img src="images/working.gif" /></div>`);
 
-    const response = await fetch('http://openlibrary.org/search.json?' + param + '=' + query);
+    const response = await fetch('https://openlibrary.org/search.json?' + param + '=' + query);
 
     if (response.ok) {
         const data = await response.json()

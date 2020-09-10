@@ -5,7 +5,7 @@ async function searchClickHandler() {
     $('#search-results-modal').css('max-width', '300px');
     $('#search-results').html(`<div style="text-align: center;"><img src="/images/working.gif" /></div>`);
 
-    const response = await fetch('http://openlibrary.org/search.json?' + param + '=' + query);
+    const response = await fetch('https://openlibrary.org/search.json?' + param + '=' + query);
 
     if (response.ok) {
         const data = await response.json();
