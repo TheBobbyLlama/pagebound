@@ -5,8 +5,7 @@
 				<div class="cell small-10">
 					<h2 id="book_title">{{title}}</h2>
 				</div>
-				<div class="cell small-2">
-					TODO
+				<div id="book_rating" class="cell small-2">
 				</div>
 			</div>
             <div class="card-section grid-x grid-margin-x">
@@ -23,9 +22,11 @@
 						<div class="cell small-6">
 							<a href="https://www.amazon.com/s?k={{amazonUrl}}&i=stripbooks">Find on Amazon</a>
 						</div>
+						{{#if clubOwner}}
 						<div class="cell small-6">
-							<button type="button" class="success button small" id="add-to-club">Add Book to Club</button>
+							<button type="button" class="success button small" id="add-to-club" data-isbn="{{isbn}}">Add Book to Club</button>
 						</div>
+						{{/if}}
 					</div>
 				</div>
             </div>

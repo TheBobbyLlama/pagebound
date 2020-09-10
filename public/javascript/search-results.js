@@ -32,14 +32,11 @@ async function searchClickHandler() {
                         </strong>
                         <br>
                         ${(() => { if (info.author_name) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
-                        <br>
-                        <a href="https://www.amazon.com/s?k=${url}&i=stripbooks">Find on Amazon</a>
                     </div>
                     <div>
                         ${(() => { if (info.pagebound_rating_count) { return `<p>Rated <strong>${info.pagebound_rating_average}</strong> by <strong>${info.pagebound_rating_count}</strong> users</p>`} else { return ``}})()}
                         <div class="flex-container">
                             <button type="button" name="book-info" class="button small" style="margin-right: 10px;" id="book-page" data-url="${window.location.protocol}//${window.location.host}/book/${info.title}/isbn/${info.isbn[0]}">Go to Book Page</button>
-                            <button type="button" class="success button small" id="add-to-club">Add Book to Club</button>
                         </div>
                     </div>
                 </div>
@@ -71,4 +68,10 @@ async function getBookRatings(results) {
     }
 }
 
-$('#book-search-submit').click(searchClickHandler);
+function bookInfoHandler() {
+    const url = $(this).attr('data-url');
+    window.location.assign(url);
+}
+
+$('#book-search-submit').on('click', searchClickHandler);
+$('#search-results').on('click', 'button[name=\'book-info\']', bookInfoHandler);
