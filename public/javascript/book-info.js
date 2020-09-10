@@ -21,6 +21,7 @@ const getBookInfo = async function() {
 		const bookData = Object.entries(data)[0][1];
 		//console.log(bookData);
 		let authorString = 'by ';
+		let coverString = '/images/logo.png';
 
 		bookData.authors.forEach((value, index, array) => {
 			if (index > 1) {
@@ -33,7 +34,13 @@ const getBookInfo = async function() {
 
 			authorString += value.name;
 		});
-		$('#cover_panel').attr('style', 'background-image: url(' + bookData.cover.large + ');');
+
+		if (bookData.cover) {
+			$('#cover_panel').css('background-image', 'url(' + bookData.cover.large + ')');
+		} else {
+			$('#cover_panel').css('background-image', 'url(/images/logo.png)').css('opacity', 0.5);
+		}
+		
 		$('#author_info').text(authorString);
 	}
 }

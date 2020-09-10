@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./images/logo.png" type="image/png" />
+    <link rel="icon" href="/images/logo.png" type="image/png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <div class="top-bar" id="responsive-menu">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text page-title">Pagebound</li>
+                <li class="menu-text page-title"><a href="/">Pagebound</a></li>
                 {{#if loggedIn}}
                 <li class="has-submenu">
                     <a href="#0">My Clubs</a>
@@ -28,7 +28,7 @@
                 <li><a href="/change-user-settings">Account Settings</a></li>
                 <li><a href="" id="logout">Log Out</a></li>
                 {{else}}
-                <li><a href="" id="login">Log In</a></li>
+                <li><a href="/login" id="login">Log In</a></li>
                 {{/if}}
             </ul>
         </div>
@@ -41,8 +41,8 @@
                         <option value="author">Author</option>
                     </select>  
                 </li>  
-                <li><input type="search" placeholder="Search" id="book-search-input"></li>
-                <li><button style="margin-left: 7px;" type="button" class="button" id="book-search-submit" data-open="search-results-modal">Search Books</button></li>
+                <li><input type="search" placeholder="Search" id="book-search-input" style="margin-right: 0px;"></li>
+                <li><button type="button" class="button" id="book-search-submit" data-open="search-results-modal">Search Books</button></li>
             </ul>
             </div>
         </div>

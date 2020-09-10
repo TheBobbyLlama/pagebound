@@ -2,7 +2,8 @@ async function searchClickHandler() {
     const param = $('#book-search-select').val();
     const query = $('#book-search-input').val().toLowerCase().split(' ').join('+');
 
-    $('#search-results').html(`<div style="text-align: center;"><img src="${window.location.protocol}//${window.location.host}/images/working.gif" /></div>`);
+    $('#search-results-modal').css('max-width', '300px');
+    $('#search-results').html(`<div style="text-align: center;"><img src="/images/working.gif" /></div>`);
 
     const response = await fetch('http://openlibrary.org/search.json?' + param + '=' + query);
 
@@ -15,15 +16,17 @@ async function searchClickHandler() {
         // This will append ratings to the book items, if applicable.
         await getBookRatings(results);
 
+        $('#search-results-modal').css('max-width', '');
         $('#search-results').empty();
 
         results.forEach(info => {
             const url = info.title.toLowerCase().split(' ').join('+');
+
             $('#search-results').append(`
             <ol>
             <li class="flex-container align-top">
                 <div style="margin-right: 25px; margin-top: 10px; flex: 0 0 auto; height: 250px; width: 200px;">
-                    <img src="${window.location.protocol}//${window.location.host}/images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
+                    <img src="/images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
                 </div>
                 <div class="flex-container align-self-stretch" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
                     <div>
@@ -36,7 +39,7 @@ async function searchClickHandler() {
                     <div>
                         ${(() => { if (info.pagebound_rating_count) { return `<p>Rated <strong>${info.pagebound_rating_average}</strong> by <strong>${info.pagebound_rating_count}</strong> users</p>`} else { return ``}})()}
                         <div class="flex-container">
-                            <button type="button" name="book-info" class="button small" style="margin-right: 10px;" id="book-page" data-url="${window.location.protocol}//${window.location.host}/book/${info.title}/isbn/${info.isbn[0]}">Go to Book Page</button>
+                            <button type="button" name="book-info" class="button small" style="margin-right: 10px;" id="book-page" data-url="/book/${encodeURIComponent(info.title)}/isbn/${info.isbn[0]}">Go to Book Page</button>
                         </div>
                     </div>
                 </div>
