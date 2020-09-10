@@ -168,8 +168,16 @@ ul.menu, .top-bar {
 
 /* dashboard styles */
 
-.dashboard-menu {
-  background-color: var(--background-light) !important
+#dashboard-container {
+  background-color: var(--background-light) !important;
+  margin:0;
+  max-width: initial;
+  padding: 0;
+  width: 100%;
+}
+
+.dashboard-menu, #dashboard-container {
+  background-color: var(--background-light) !important;
 }
 
 .dashboard-menu .button {
