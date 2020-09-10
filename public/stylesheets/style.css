@@ -37,12 +37,12 @@ li.page-title {
   color: var(--pagebound-blue);
 }
 
-a[role='menuitem'] {
+a[role='menuitem'], #create-club-form a.flex-container {
   color: var(--pagebound-blue);
   transition: 0.5s;
 }
 
-.page-title a:hover, a[role='menuitem']:hover {
+.page-title a:hover, a[role='menuitem']:hover, #create-club-form a.flex-container:hover {
   color: var(--pagebound-blue-light);
 }
 
@@ -135,16 +135,17 @@ ul.menu, .top-bar {
 }
 
 .club-result-title {
-  background-color: #1779ba;
+  background-color: var(--pagebound-blue);
   color: white;
 }
 
 #zip-search-results {
-  border-color: #1779ba;
+  border-color: var(--pagebound-blue);
 }
 
 .club-search-item {
-  border-color: #1779ba;
+  border-color: var(--pagebound-blue);
+  margin: 0;
 }
 
 .club-search-card {
@@ -164,6 +165,21 @@ ul.menu, .top-bar {
   margin: 1rem;
 }
 /* club search styles end */
+
+/* dashboard styles */
+
+.dashboard-menu {
+  background-color: var(--background-light) !important
+}
+
+.dashboard-menu .button {
+  background-color: var(--background-light);
+  border-radius: 0 !important;
+}
+
+.club-card {
+  border-radius: 0 !important;
+}
 
 /*cta styles*/
 .cta-filter {
@@ -220,6 +236,9 @@ ul.menu, .top-bar {
 .cta-button:hover {
   background-color: rgb(80, 80, 80);
 }
+/*cta styles end*/
+
+
 
 
 
