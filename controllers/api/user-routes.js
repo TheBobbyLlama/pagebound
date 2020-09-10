@@ -36,6 +36,13 @@ router.get('/search', (req, res) => {
         });
 });
 
+//update user settings
+router.put('/settings/', (req, res) => {
+
+    updateUser(req.session.user_id, req, res)//, notifyDM, notifyDiscussion)
+        .then(()=> {console.log("updated... right?")})
+});
+
 //get one user
 router.get('/:id', (req, res) => {
     User.findOne({
@@ -170,6 +177,26 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
+const updateUser = async function (id, req , res) {
+    User.update(req.body, {
+        individualHooks: true,
+        where: {
+            id: id
+        }
+    })
+        .then(dbUserData => {
+            if (!dbUserData[0]) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+        
+}
 
 const generateToken = function() {
     const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

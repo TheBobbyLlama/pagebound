@@ -30,6 +30,4 @@ async function loginFormHandler(event) {
     }
 }
 
-
-//LAURENCE, see element IDs 
 document.querySelector('#login-form').addEventListener('submit', loginFormHandler);
