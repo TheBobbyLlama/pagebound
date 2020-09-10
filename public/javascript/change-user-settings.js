@@ -1,9 +1,14 @@
 async function displayCurrentSettings() {
-    const response = await fetch('/api/users/settings');
+    const response = await fetch('/api/users/settings',{method: "get"});
 
     if (response.ok) {
         const data = await response.json();
-        console.log('data');
+        console.log(data);
+        if (data.notify_new_discussion_comment) { document.getElementById("comment-yes").checked = true } 
+        else { document.getElementById("comment-no").checked = true}
+        if (data.notify_message) { document.getElementById("dm-yes").checked = true }
+        else { document.getElementById("dm-no").checked = true }
+        document.getElementById("newZIP").value = data.zipcode
     }
 }
 
@@ -14,7 +19,8 @@ async function settingsUpdateFormHandler(event) {
         method: 'put',
         body: JSON.stringify({
             notify_message: document.getElementById("dm-yes").checked,
-            notify_new_discussion_comment: document.getElementById("comment-yes").checked
+            notify_new_discussion_comment: document.getElementById("comment-yes").checked,
+            zipcode: document.getElementById("newZIP").value
         }),
         headers: { 'Content-Type': 'application/json' }
     });

@@ -40,8 +40,30 @@ router.get('/search', (req, res) => {
 router.put('/settings/', (req, res) => {
 
     updateUser(req.session.user_id, req, res)//, notifyDM, notifyDiscussion)
-        .then(()=> {console.log("updated... right?")})
+        .then(() => { console.log("updated... right?") })
 });
+
+//return user settings
+router.get('/settings/', (req, res) => {
+    User.findOne({
+        attributes: { exclude: ['password'] },
+        where: {
+            id: req.session.user_id
+        }
+    })
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+});
+
 
 //get one user
 router.get('/:id', (req, res) => {
