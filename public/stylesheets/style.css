@@ -5,6 +5,10 @@
   border-radius: 7px !important;
 }
 
+.callout {
+  border-radius: 0;
+}
+
 .page-title {
   font-family: 'Montserrat Alternates', sans-serif !important;
   color: #517399 !important;

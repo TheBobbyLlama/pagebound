@@ -92,7 +92,7 @@ router.post('/', (req, res) => {
             })
                 .then(dbVerificationData => {
                     const referral = req.headers.origin + '/validate/' + dbUserData.id + '/' + dbVerificationData.token;
-
+                    console.log(referral)
                     transporter.sendMail({
                         from: 'Pagebound <pagebound.bootcamp@gmail.com>',
                         to: [ dbUserData.email ],
@@ -101,16 +101,14 @@ router.post('/', (req, res) => {
                         html: generateEmailBody(dbUserData.username, referral)
                     }, function() {});
 
-                    res.json(dbUserData);
                     req.session.save(() => {
                         req.session.user_id = dbUserData.id;
                         req.session.username = dbUserData.username;
                         req.session.loggedIn = true;
                         req.session.zipcode = dbUserData.zipcode;
-                
-                    res.json({ user: dbUserData, message: 'You are now logged in!' });
                     });
-            });
+                    res.json(dbUserData);
+                });
         })
         .catch(err => {
             console.log(err);
