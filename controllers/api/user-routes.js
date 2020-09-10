@@ -102,6 +102,14 @@ router.post('/', (req, res) => {
                     }, function() {});
 
                     res.json(dbUserData);
+                    req.session.save(() => {
+                        req.session.user_id = dbUserData.id;
+                        req.session.username = dbUserData.username;
+                        req.session.loggedIn = true;
+                        req.session.zipcode = dbUserData.zipcode;
+                
+                    res.json({ user: dbUserData, message: 'You are now logged in!' });
+                    });
             });
         })
         .catch(err => {

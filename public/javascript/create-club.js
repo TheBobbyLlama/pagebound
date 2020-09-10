@@ -66,8 +66,7 @@ async function searchInputResults() {
     const query = $('#book-add-input').val().toLowerCase().split(' ').join('+');
     console.log('searching');
 
-    $('#book-add-results').html('');
-    $('#book-add-loading-gif').removeClass('hide');
+    $('#book-add-results').html(`<div style="text-align: center;"><img src="images/working.gif" /></div>`);
 
     const response = await fetch('http://openlibrary.org/search.json?' + param + '=' + query);
 
@@ -88,20 +87,20 @@ async function searchInputResults() {
             return
         }
 
-        $('#book-add-loading-gif').addClass('hide');
+        $('#book-add-results').html('');
 
         $(ratedResults).each(function() {
             const info = $(this)[0];
             const url = info.title.toLowerCase().split(' ').join('+');
             $('#book-add-results').append(`
             <ol class="flex-container align-center">
-            <li class="flex-container align-top" id="result">
+            <li class="flex-container align-top align-justify" style="width: 20rem;" id="result">
                 <div style="margin-right: 25px; margin-top: 10px; flex: 0 0 auto; height: 150px; width: 120px; position: relative;">
                     <div class="no-image-found">No<br>Image<br>Found.</div>
-                    <img src="http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg" alt="" style="height: 150px; width: auto; position: absolute;">
+                    <img src="http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg" alt="" style="max-height: 150px; width: 120px; position: absolute;">
                 </div>
-                <div class="flex-container align-self-stretch" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
-                    <div>
+                <div class="flex-container align-self-stretch align-right" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
+                    <div style="text-align: right;">
                         <strong>
                             ${info.title}
                         </strong>
@@ -109,7 +108,7 @@ async function searchInputResults() {
                         ${(() => { if (info.author_name) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
                     </div>
                     <div>
-                        <div class="flex-container">
+                        <div class="flex-container align-right">
                             <button type="button" class="success button small" id="add-to-club" data-close>Add Book to Club</button>
                         </div>
                     </div>

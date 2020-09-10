@@ -34,6 +34,7 @@ router.get('/', async (req, res) => {
                         model: User,
                         as: "members",
                         attributes: { exclude: ['password'] },
+                        attributes: ['username', 'id', 'zipcode'],
                         where: {
                             zipcode: {
                                 [Op.or]: nearbyZIPs

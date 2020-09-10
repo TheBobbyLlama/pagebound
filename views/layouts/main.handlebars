@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./images/logo.png" type="image/png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/style.css">
-    <title>Pagebound</title>
+    <title class="page-title">Pagebound</title>
 </head>
 <body>
     <div class="top-bar" id="responsive-menu">
         <div class="top-bar-left">
             <ul class="dropdown menu" data-dropdown-menu>
-                <li class="menu-text">Pagebound</li>
+                <li class="menu-text page-title">Pagebound</li>
                 {{#if loggedIn}}
                 <li class="has-submenu">
                     <a href="#0">My Clubs</a>
@@ -29,7 +31,8 @@
             </ul>
         </div>
         <div class="top-bar-right">
-            <ul class="menu">
+            <div>
+                <ul class="menu">
                 <li>
                     <select id="book-search-select">
                         <option value="title">Title</option>
@@ -39,6 +42,7 @@
                 <li><input type="search" placeholder="Search" id="book-search-input"></li>
                 <li><button style="margin-left: 7px;" type="button" class="button" id="book-search-submit" data-open="search-results-modal">Search Books</button></li>
             </ul>
+            </div>
         </div>
         <div class="reveal" id="search-results-modal" data-reveal>
             <div class="grid-container" style="max-height: 70vh;">

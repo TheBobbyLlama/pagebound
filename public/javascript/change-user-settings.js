@@ -1,3 +1,11 @@
+async function displayCurrentSettings() {
+    const response = await fetch('/api/users/settings');
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log('data');
+    }
+}
 
 async function settingsUpdateFormHandler(event) {
     event.preventDefault();
@@ -18,4 +26,5 @@ async function settingsUpdateFormHandler(event) {
     }
 }
 
+window.addEventListener('load', displayCurrentSettings);
 document.querySelector('#user-settings-form').addEventListener('submit', settingsUpdateFormHandler);

@@ -1,6 +1,16 @@
 *:focus {
     outline: none;
 }
+.button, input, .card {
+  border-radius: 7px !important;
+}
+
+.page-title {
+  font-family: 'Montserrat Alternates', sans-serif !important;
+  color: #517399 !important;
+}
+
+
 
 /* SIGNUP STYLES*/
 /* password match styles */
@@ -49,6 +59,21 @@
 /* searchbar styles */
 #book-search-input {
     border-left: none;
+    border-radius: 0 !important;
+}
+
+#book-add-input {
+    border-left: none;
+    border-radius: 0 7px 7px 0 !important;
+}
+
+#book-search-select, #book-add-select {
+  border-radius: 7px 0 0 7px !important;
+}
+
+#book-search-submit {
+  border-radius: 0 7px 7px 0 !important;
+  margin-left: 0 !important;
 }
 
 .no-image-found {
@@ -90,7 +115,62 @@
 .group-page-button {
   margin: 1rem;
 }
+/* club search styles end */
 
+/*cta styles*/
+.cta-filter {
+  min-height: 60vh;
+  width: 100%;
+  background-color: rgb(255, 255, 255, 0.2);
+  text-align: right;
+}
+
+.cta-title {
+  margin-top: 2rem;
+  color: #cae3e2;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.4);
+  font-size: 3rem;
+}
+
+.cta-background {
+  min-height: 60vh;
+  width: 100vw;
+  background-image: url(../images/book_open_stock.jpg);
+  background-size: 130%;
+  background-position: 100% 0%; 
+}
+
+.cta-mission {
+  font-family: 'Merriweather', serif;
+  font-size: 1.3rem;
+  font-weight: lighter;
+  text-shadow: 0 0 10px rgb(0, 0, 0);
+  color: white;
+  width: 100%;
+  padding-right: 2rem;
+  margin-top: 1rem;
+}
+
+.cta-p {
+  width: 30%;
+}
+
+.cta-button-container {
+  width: 30%;
+  padding: 0 2rem 0 0;
+}
+
+.cta-button {
+  font-family: 'Merriweather', serif;
+  font-size: 1.5rem;
+  background-color: rgb(30, 30, 30, 0.5);
+}
+
+.cta-button:hover {
+  background-color: rgb(80, 80, 80);
+}
 
 
 

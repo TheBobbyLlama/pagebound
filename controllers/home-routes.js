@@ -1,15 +1,13 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  if (req.session.loggedIn) {
-    res.render('dashboard', {
-        loggedIn: req.session.loggedIn
-    });
-  } else {
-    res.render('login', {
-        loggedIn: req.session.loggedIn
-    });
-  }
+    if (req.session.loggedIn) {
+        res.render('dashboard', {
+            loggedIn: req.session.loggedIn
+        });
+    } else {
+        res.render('cta');
+    }
 });
 
 router.get('/club-search', (req, res) => {
@@ -24,6 +22,10 @@ router.get('/login', (req, res) => {
 
 router.get('/signup', (req, res) => {
     res.render('signup');
+});
+
+router.get('/cta', (req, res) => {
+    res.render('cta');
 });
 
 router.get('/create-club', (req, res) => {
