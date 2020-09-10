@@ -91,16 +91,17 @@
 }
 
 .club-result-title {
-  background-color: #1779ba;
+  background-color: #1796eb;
   color: white;
 }
 
 #zip-search-results {
-  border-color: #1779ba;
+  border-color: #1796eb;
 }
 
 .club-search-item {
-  border-color: #1779ba;
+  border-color: #1796eb;
+  margin: 0;
 }
 
 .club-search-card {
@@ -120,6 +121,24 @@
   margin: 1rem;
 }
 /* club search styles end */
+
+/* dashboard styles */
+
+.button {
+  background-color: #1796eb;
+}
+
+.dashboard-menu {
+  background-color: #1796eb !important
+}
+
+.dashboard-menu .button {
+  border-radius: 0 !important;
+}
+
+.club-card {
+  border-radius: 0 !important;
+}
 
 /*cta styles*/
 .cta-filter {
@@ -175,6 +194,9 @@
 .cta-button:hover {
   background-color: rgb(80, 80, 80);
 }
+/*cta styles end*/
+
+
 
 
 

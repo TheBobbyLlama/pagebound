@@ -100,13 +100,7 @@ router.post('/', (req, res) => {
                         text: generateEmailText(dbUserData.username, referral),
                         html: generateEmailBody(dbUserData.username, referral)
                     }, function() {});
-
-                    req.session.save(() => {
-                        req.session.user_id = dbUserData.id;
-                        req.session.username = dbUserData.username;
-                        req.session.loggedIn = true;
-                        req.session.zipcode = dbUserData.zipcode;
-                    });
+                    
                     res.json(dbUserData);
                 });
         })

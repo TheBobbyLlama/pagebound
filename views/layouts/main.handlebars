@@ -16,19 +16,10 @@
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text page-title">Pagebound</li>
                 {{#if loggedIn}}
-                <li class="has-submenu">
-                    <a href="#0">My Clubs</a>
-                     <ul class="submenu menu vertical" data-submenu>
-                        {{#each user.clubs as |club|}}
-                        <li><a href="#0">{{club.name}}</a></li>
-                        {{/each}} 
-                    </ul>
-                </li>
-                <li><a href="/messages">Messages</a></li>
-                <li><a href="/change-user-settings">Account Settings</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
                 <li><a href="" id="logout">Log Out</a></li>
                 {{else}}
-                <li><a href="" id="login">Log In</a></li>
+                <li><a href="/login">Log In</a></li>
                 {{/if}}
             </ul>
         </div>
