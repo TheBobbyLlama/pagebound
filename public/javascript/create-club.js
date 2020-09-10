@@ -26,6 +26,7 @@ async function createClubFormHandler(event) {
             const res = await response.json()
             console.log(res);
             addUsersToClub(res);
+            document.location.replace('/club' + res.id);
             //document.location.replace('/club' + res.id);
         } else {
             const error = await response.json()
