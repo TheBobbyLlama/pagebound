@@ -41,7 +41,7 @@ const getBookInfo = async function() {
 		});
 
 		if (data.volumeInfo.imageLinks) {
-			$('#cover_panel').css('background-image', 'url(' + (data.volumeInfo.imageLinks.medium || data.volumeInfo.imageLinks.thumbnail) + ')');
+			$('#cover_panel').css('background-image', 'url(' + data.volumeInfo.imageLinks.thumbnail + ')');
 		} else {
 			$('#cover_panel').css('background-image', 'url(/images/logo.png)').css('opacity', 0.5);
 		}

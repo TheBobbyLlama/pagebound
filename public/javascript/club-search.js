@@ -23,7 +23,7 @@ async function distanceSearchHandler() {
                 if (bookFetch.ok) {
                     const bookInfo = await bookFetch.json();
                     title = bookInfo.volumeInfo.title;
-                    cover = bookInfo.volumeInfo.imageLinks.medium || bookInfo.volumeInfo.imageLinks.thumbnail;
+                    cover = bookInfo.volumeInfo.imageLinks.thumbnail;
                 }
             }
 
