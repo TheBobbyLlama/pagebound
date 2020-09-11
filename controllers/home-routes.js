@@ -2,9 +2,7 @@ const router = require('express').Router();
 
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
-        res.render('dashboard', {
-            loggedIn: req.session.loggedIn
-        });
+        res.redirect('/dashboard');
     } else {
         res.render('cta');
     }
@@ -42,15 +40,16 @@ router.get('/results', (req, res) => {
 
 router.get('/change-user-settings', (req, res) => {
     res.render('change-user-settings', {
-                loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn
     });
 });
 
-router.get('/book/:title/isbn/:isbn', (req, res) => {
+// Book info route.
+router.get('/book/:title/id/:id', (req, res) => {
     res.render('book-info', {
         loggedIn: req.session.loggedIn,
         title: req.params.title,
-        isbn: req.params.isbn,
+        id: req.params.id,
         amazonUrl: req.params.title.toLowerCase().split(' ').join('+')
     });
 });

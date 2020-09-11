@@ -80,7 +80,7 @@ router.get('/:id', (req, res) => {
             },
             {
                 model: BookRating,
-                attributes: ['id', 'user_id', 'isbn', 'score']
+                attributes: ['id', 'user_id', 'book_id', 'score']
             }
         ]
     })

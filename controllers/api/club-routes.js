@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
     if (req.session) {
         Club.create({
             name: req.body.name,
-            isbn: req.body.isbn,
+            book_id: req.body.book_id,
             owner_id: req.session.user_id,
         })
         .catch(err => {

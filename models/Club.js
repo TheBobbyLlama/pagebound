@@ -22,10 +22,13 @@ Club.init(
 		name: {
 			type: DataTypes.STRING,
 			unique: true,
-			allowNull: false
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
 		},
-		isbn: {
-			type: DataTypes.STRING(13)
+		book_id: {
+			type: DataTypes.STRING(64)
 		}
 	},
 	{

@@ -10,12 +10,12 @@ router.get('/', (req, res) => {
             include: [
                 {
                     model: Club,
-                    attributes: ['name', 'isbn'],
+                    attributes: ['name', 'book_id'],
                     as: 'clubs'
                 },
                 {
                     model: BookRating,
-                    attributes: ['id', 'user_id', 'isbn', 'score']
+                    attributes: ['id', 'user_id', 'book_id', 'score']
                 },
                 {
                     model: DirectMessage

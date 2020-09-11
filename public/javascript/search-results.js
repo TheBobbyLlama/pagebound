@@ -1,45 +1,52 @@
 async function searchClickHandler() {
+    const shuffleKey = [ "A", "v", "d", "W", "K", "g", "l", "y", "l", "D", "F", "H", "a", "b", "4", "i", "2", "I", "g", "m", "1", "k", "4", "x", "D", "f", "o", "f", "O", "S", "l", "O", "k", "7", "z", "e", "v", "8", "d" ];
     const param = $('#book-search-select').val();
-    const query = $('#book-search-input').val().toLowerCase().split(' ').join('+');
+    const query = $('#book-search-input').val().toLowerCase();
+
+    let buildKey = "";
+
+    for (let i = 0; i < shuffleKey.length; i++) {
+        buildKey += shuffleKey[(17 * i) % shuffleKey.length];
+    }
 
     $('#search-results-modal').css('max-width', '300px');
     $('#search-results').html(`<div style="text-align: center;"><img src="/images/working.gif" /></div>`);
 
-    const response = await fetch('https://openlibrary.org/search.json?' + param + '=' + query);
+    const response = await fetch(`https://www.googleapis.com/books/v1/volumes?orderBy=relevance&printType=BOOKS&q=${param}%3A${encodeURIComponent(query)}&key=${buildKey}`)
 
     if (response.ok) {
-        const data = await response.json();
+        const results = await response.json();
 
-        //I guess in a few cases there is no ISBN. This only seems to happen w duplicates or really obscure books, so we'll just eliminate them for now.
-        const results = data.docs.filter(result => result.isbn);
+        //console.log(results);
 
         // This will append ratings to the book items, if applicable.
-        await getBookRatings(results);
+        await getBookRatings(results.items);
 
         $('#search-results-modal').css('max-width', '');
         $('#search-results').empty();
 
-        results.forEach(info => {
-            const url = info.title.toLowerCase().split(' ').join('+');
+        results.items.forEach(info => {
+            const url = info.volumeInfo.title.toLowerCase().split(' ').join('+');
+            let authorString = info.volumeInfo.authors.join(', ');
 
             $('#search-results').append(`
             <ol>
             <li class="flex-container align-top">
                 <div style="margin-right: 25px; margin-top: 10px; flex: 0 0 auto; height: 250px; width: 200px;">
-                    <img src="/images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = 'http://covers.openlibrary.org/b/isbn/${info.isbn[0]}-L.jpg';">
+                    <img src="/images/cover-loading.gif" alt="" style="height: 250px; width: auto;" onload="this.src = '${info.volumeInfo.imageLinks.thumbnail}';">
                 </div>
                 <div class="flex-container align-self-stretch" style="margin-top: 10px; flex-direction: column; justify-content: space-between;">
                     <div>
                         <strong>
-                            ${info.title}
+                            ${info.volumeInfo.title}
                         </strong>
                         <br>
-                        ${(() => { if (info.author_name) { return `<p>${info.author_name[0]}<p>`} else { return ``}})()}
+                        ${(() => { if (authorString) { return `<p>${authorString}<p>`} else { return ``}})()}
                     </div>
                     <div>
                         ${(() => { if (info.pagebound_rating_count) { return `<p>Rated <strong>${info.pagebound_rating_average}</strong> by <strong>${info.pagebound_rating_count}</strong> users</p>`} else { return ``}})()}
                         <div class="flex-container">
-                            <button type="button" name="book-info" class="button small" style="margin-right: 10px;" id="book-page" data-url="/book/${encodeURIComponent(info.title)}/isbn/${info.isbn[0]}">Go to Book Page</button>
+                            <button type="button" name="book-info" class="button small" style="margin-right: 10px;" id="book-page" data-url="/book/${encodeURIComponent(info.volumeInfo.title)}/id/${info.id}">Go to Book Page</button>
                         </div>
                     </div>
                 </div>
@@ -55,13 +62,13 @@ async function getBookRatings(results) {
     const response = await fetch('/api/ratings/forlist', {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ isbns: results.map(element => element.isbn[0])})
+        body: JSON.stringify({ book_ids: results.map(element => element.id)})
     });
 
     if (response.ok) {
         const data = await response.json();
         for (let i = 0; i < data.length; i++) {
-            let curBook = results.find(book => book.isbn[0] === data[i].isbn);
+            let curBook = results.find(book => book.id === data[i].book_id);
 
             if (curBook) {
                 curBook.pagebound_rating_average = data[i].average_score;

@@ -6,7 +6,7 @@ const sequelize = require('../../config/connection');
 router.post('/', (req, res) => {
     if (req.session) {
         BookRating.create({
-            isbn: req.body.isbn,
+            book_id: req.body.book_id,
             user_id: req.session.user_id,
             score: req.body.score
         })
@@ -19,21 +19,21 @@ router.post('/', (req, res) => {
 });
 
 //Find ratings for book
-router.get('/book/:isbn', (req, res) => {
+router.get('/book/:id', (req, res) => {
     BookRating.findOne({
         where: {
-            isbn: req.params.isbn
+            book_id: req.params.id
         },
         attributes: [
-            'isbn',
+            'book_id',
             [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
             [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
         ],
-        group: 'isbn'
+        group: 'book_id'
     })
     .then(dbRatingData => {
         if (!dbRatingData) {
-        res.status(404).json({ message: 'No book found with this isbn' });
+        res.status(404).json({ message: 'No book found with this id' });
         return;
         }
         res.json(dbRatingData);
@@ -48,13 +48,13 @@ router.get('/book/:isbn', (req, res) => {
 router.post('/forlist', (req, res) => {
     BookRating.findAll({
         attributes: [
-            'isbn',
+            'book_id',
             [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
             [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
         ],
-        group: 'isbn',
+        group: 'book_id',
         where: {
-            isbn: req.body.isbns
+            book_id: req.body.book_ids
         }
     })
     .then(dbRatingData => res.json(dbRatingData))
@@ -68,11 +68,11 @@ router.post('/forlist', (req, res) => {
 router.get('/', (req, res) => {
     BookRating.findAll({
         attributes: [
-            'isbn',
+            'book_id',
             [sequelize.fn('AVG', sequelize.col('score')), 'average_score'],
             [sequelize.fn('COUNT', sequelize.col('score')), 'rating_count']
         ],
-        group: 'isbn'
+        group: 'book_id'
     })
     .then(dbRatingData => res.json(dbRatingData))
     .catch(err => {
@@ -82,17 +82,17 @@ router.get('/', (req, res) => {
 });
 
 //change rating
-router.put('/:isbn', (req, res) => {
+router.put('/:id', (req, res) => {
     if (req.session) {
         BookRating.update(req.body, {
             where: {
-                isbn: req.params.isbn,
+                book_id: req.params.id,
                 user_id: req.session.user_id
             }
         })
         .then(dbRatingData => {
             if (!dbRatingData[0]) {
-            res.status(404).json({ message: 'No rating found with this isbn' });
+            res.status(404).json({ message: 'No rating found with this id' });
             return;
             }
             res.json(dbRatingData);
@@ -105,17 +105,17 @@ router.put('/:isbn', (req, res) => {
 });
 
 //delete rating
-router.delete('/:isbn', (req, res) => {
+router.delete('/:id', (req, res) => {
     if (req.session) {
         BookRating.destroy({
             where: {
-                isbn: req.params.isbn,
+                book_id: req.params.id,
                 user_id: req.session.user_id
             }
         })
         .then(dbRatingData => {
             if (!dbRatingData) {
-                res.status(404).json({ message: 'No rating found with this isbn!' });
+                res.status(404).json({ message: 'No rating found with this id!' });
                 return;
             }
             res.json(dbRatingData);

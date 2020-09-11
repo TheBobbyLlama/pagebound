@@ -18,8 +18,8 @@ BookRating.init(
 				key: "id"
 			}
 		},
-		isbn: {
-			type: DataTypes.STRING(13),
+		book_id: {
+			type: DataTypes.STRING(64),
 			allowNull: false,
 			validate: {
 				notEmpty: true
