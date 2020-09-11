@@ -16,12 +16,14 @@
             <ul class="dropdown menu" data-dropdown-menu>
                 <li class="menu-text page-title"><a href="/">Pagebound</a></li>
                 {{#if loggedIn}}
+                <li style="position: relative; top: -3px;"><a href="#"><i class="foundicon-mail"></i> Messages</a></li>
                 <li><a href="" id="logout">Log Out</a></li>
                 {{else}}
                 <li><a href="/login">Log In</a></li>
                 {{/if}}
             </ul>
         </div>
+        {{#if loggedIn}}
         <div class="top-bar-right">
             <div>
                 <ul class="menu">
@@ -45,6 +47,7 @@
                     <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        {{/if}}
     </div>
     <main>
         {{{ body }}}

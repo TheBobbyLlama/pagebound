@@ -196,6 +196,16 @@ ul.menu, .top-bar {
   border-radius: 0 !important;
 }
 
+#club-summary h2, #club-summary h3 {
+  color: var(--pagebound-blue);
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+#club-summary #cover_panel {
+  background-position: top;
+}
+
 /*cta styles*/
 .cta-filter {
   min-height: 60vh;
@@ -309,8 +319,8 @@ ul.menu, .top-bar {
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  min-height: 200px;
 }
-
 /* book page styles end */
 
 /* font-face */
@@ -370,6 +380,8 @@ ul.menu, .top-bar {
   
   .foundicon-mail:before {
     content: "\f007";
+    position: relative;
+    top: 2px;
   }
   
   .foundicon-calendar:before {

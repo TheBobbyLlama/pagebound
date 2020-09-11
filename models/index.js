@@ -45,6 +45,16 @@ Club.hasMany(ClubMember, {
 	foreignKey: "club_id"
 });
 
+// Owner to Club - one to one
+Club.belongsTo(User, {
+	as: 'owner',
+	foreignKey: "owner_id"
+});
+
+User.hasMany(Club, {
+	foreignKey: "owner_id"
+});
+
 // User to DirectMessage - one to many (sender) & one to many (recipient)
 User.hasMany(DirectMessage, {
 	foreignKey: "sender_id"
