@@ -10,6 +10,26 @@ router.get('/', (req, res) => {
         });
 });
 
+//change topic
+router.put('/:id', (req, res) => {
+    DiscussionTopic.update(req.body, {
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbTopicData => {
+            if (!dbTopicData[0]) {
+                res.status(404).json({ message: 'No Topic found with this id' });
+                return;
+            }
+            res.json(dbTopicData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
+
 router.get('/:id', (req, res) => {
     DiscussionTopic.findOne({
         where: {
