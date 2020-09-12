@@ -57,7 +57,7 @@ router.get('/:id', (req, res) => {
 
         res.render('club', {
 			loggedIn: req.session.loggedIn,
-			isOwner: (clubData.owner.id === req.session.user_id),
+			isOwner: (clubData.owner_id === req.session.user_id),
             club: clubData
 		});
 		
