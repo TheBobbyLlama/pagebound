@@ -206,6 +206,12 @@ ul.menu, .top-bar {
   background-position: top;
 }
 
+/* club page */
+.topic-summary + .topic-summary {
+  border-top: solid 1px var(--pagebound-blue-light);
+  padding-top: 10px;
+}
+
 /*cta styles*/
 .cta-filter {
   min-height: 60vh;

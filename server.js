@@ -4,8 +4,9 @@ const routes = require("./controllers");
 const sequelize = require("./config/connection");
 const session = require("express-session");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const helpers = require('./util/helpers');
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({});
+const hbs = exphbs.create({ helpers });
 
 const sess = {
   secret: "I LIKE BOOKS Y'ALL",
