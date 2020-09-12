@@ -1,6 +1,6 @@
 // TODO - Additional markup for DMs!
 const display_user = (user) => {
-	return user.username;
+	return `<span data-user-id="${user.id}">${user.username}</span>`;
 }
 
 module.exports = {

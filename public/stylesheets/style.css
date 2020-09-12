@@ -37,6 +37,11 @@ li.page-title {
   color: var(--pagebound-blue);
 }
 
+*[data-user-id] {
+  font-weight: bold;
+  color: var(--pagebound-blue);
+}
+
 a[role='menuitem'], #create-club-form a.flex-container {
   color: var(--pagebound-blue);
   transition: 0.5s;
