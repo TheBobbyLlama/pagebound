@@ -59,9 +59,31 @@ ul.menu, .top-bar {
   background-color: var(--background-light);
 }
 
-.card-divider {
+.card-divider, .card-divider small {
   background-color: var(--pagebound-blue);
   color: var(--background-light);
+}
+
+.card-divider .button {
+  background-color: var(--background-light);
+  border: solid 1px var(--pagebound-blue-light);
+  color: var(--pagebound-blue);
+  margin: 0;
+}
+
+.card-divider.comment {
+  background-color: var(--background-light);
+  border-top: solid 1px var(--pagebound-blue-light);
+  color: var(--pagebound-blue);
+}
+
+.comment-toolbar .button {
+  margin: 0px;
+}
+
+#newComment {
+  height: 200px;
+  resize: vertical;
 }
 
 /* SIGNUP STYLES*/
@@ -550,3 +572,21 @@ ul.menu, .top-bar {
   .foundicon-search:before {
     content: "\f02e";
   }
+
+/* Utility classes */
+.spread-out {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.squish-together {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.squish-together > * + * {
+  margin-left: 10px;
+}

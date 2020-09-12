@@ -22,7 +22,10 @@
 					<p><strong>Members:</strong> {{{display_userlist club.members club.owner.username}}}</p>
 				</div>
 			</div>
-			<div class="card-divider">Current Discussions</div>
+			<div class="card-divider grid-x spread-out">
+				<div>Current Discussions</div>
+				<button type="button" class="button">Start a Discussion</button>
+			</div>
 			<div class="card-section">
 				{{> topic-summary club.currentTopics}}
 			</div>

@@ -1,3 +1,4 @@
+// WARNING - This file is used by the dashboard, club, and thread views!  Don't add any page-specific Javascript here!
 const loadBookData = async function() {
 	const shuffleKey = [ "A", "v", "d", "W", "K", "g", "l", "y", "l", "D", "F", "H", "a", "b", "4", "i", "2", "I", "g", "m", "1", "k", "4", "x", "D", "f", "o", "f", "O", "S", "l", "O", "k", "7", "z", "e", "v", "8", "d" ];
 	const bookQueue = $('div[data-id]');
