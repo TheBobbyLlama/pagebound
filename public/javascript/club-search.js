@@ -45,7 +45,7 @@ async function distanceSearchHandler() {
                                 <strong>Members: ${club.members.length}</strong>
                             </div>
                             <div class="flex-container align-right">
-                                <button class="button group-page-button">Go to Group Page</button>
+                                <button class="button group-page-button" onclick="window.location.assign('/club/${club.id}')">Go to Group Page</button>
                             </div>
                         </div>
                     </div>
