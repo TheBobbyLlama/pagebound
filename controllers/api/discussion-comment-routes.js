@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { DiscussionComment, DiscussionTopic } = require('../../models');
-
+let ownerID = 0;
 router.get('/', (req, res) => {
     DiscussionComment.findAll()
         .then(dbCommentData => res.json(dbCommentData))
@@ -8,6 +8,34 @@ router.get('/', (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
+});
+
+//change comment IF the owner is making the request
+router.put('/:id', async (req, res) => {
+    const dummy = await getCommentOwnerID(req.params.id, res);
+    console.log(ownerID)
+    if (ownerID === req.session.user_id){
+        
+        DiscussionComment.update({comment_text: req.body.comment_text}, {
+            where: {
+                id: req.params.id
+            }
+        })
+            .then(dbCommentData => {
+                console.log("updated!")
+                if (!dbCommentData[0]) {
+                    res.status(404).json({ message: 'No comment found with this id' });
+                    return;
+                }
+                res.json(dbCommentData);
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
+    else {console.log("User requesting isn't the owner!")}
+
 });
 
 router.get('/:id', (req, res) => {
@@ -18,7 +46,7 @@ router.get('/:id', (req, res) => {
     })
         .then(dbCommentData => {
             if (!dbCommentData) {
-                res.status(404).json({ message: 'No user found with this id' });
+                res.status(404).json({ message: 'No comment found with this id' });
                 return;
             }
             res.json(dbCommentData);
@@ -53,7 +81,7 @@ router.delete('/:id', (req, res) => {
     })
         .then(dbCommentData => {
             if (!dbCommentData) {
-                res.status(404).json({ message: 'No topic found with this id!' });
+                res.status(404).json({ message: 'No comment found with this id!' });
                 return;
             }
             res.json(dbCommentData);
@@ -64,4 +92,24 @@ router.delete('/:id', (req, res) => {
         });
 });
 
+async function getCommentOwnerID (id, res) {
+    return DiscussionComment.findOne({
+        where: {
+            id: id
+        }
+    })
+        .then(dbCommentData => {
+            if (!dbCommentData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            
+            ownerID = dbCommentData.user_id;
+            console.log(ownerID)
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+}
 module.exports = router;
