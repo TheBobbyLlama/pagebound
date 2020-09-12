@@ -41,7 +41,7 @@ async function distanceSearchHandler() {
                         </div>
                         <div class="flex-container align-justify align-right" style="flex-direction: column;">
                             <div class="flex-container align-left" style="flex-direction: column; margin: 1rem;">
-                                <strong>Club Owner: ${club.members[0].username}</strong>
+                                <strong>Club Owner: ${club.ownerMarkup}</strong>
                                 <strong>Members: ${club.members.length}</strong>
                             </div>
                             <div class="flex-container align-right">

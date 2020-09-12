@@ -34,6 +34,18 @@ router.get('/:id', (req, res) => {
 						WHERE discussion_comment.discussion_id = discussion_topics.id
 					)`), 'last_comment']
 				],
+				include: [
+					{
+						model: DiscussionComment,
+						include: [
+							{
+								model: User,
+								attributes: [ 'id', 'username' ]
+							}
+						],
+						order: ['created_at', 'ASC']
+					}
+				],
 				group: 'book_id',
 				order: [['last_comment', 'DESC']]
 			}
@@ -43,6 +55,7 @@ router.get('/:id', (req, res) => {
 		const clubData = dbClubData.get({ plain: true });
 		const bookGroups = clubData.discussion_topics.map(element => element.book_id).filter((element, index, array) => ((element != clubData.book_id) && (array.indexOf(element) === index)));
 
+		clubData.discussion_topics.forEach(element => element.author = element.discussion_comments[0].user);
 		clubData.currentTopics = pullBookDiscussions(clubData.discussion_topics, clubData.book_id);
 		clubData.priorTopics = [];
 
@@ -53,7 +66,8 @@ router.get('/:id', (req, res) => {
 			});
 		});
 		
-		//console.log(clubData);
+		console.log(clubData);
+		//console.log(clubData.discussion_topics.map(element => element.discussion_comments));
 
         res.render('club', {
 			loggedIn: req.session.loggedIn,

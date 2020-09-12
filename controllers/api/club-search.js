@@ -3,7 +3,8 @@ const router = require('express').Router();
 const fetch = require("node-fetch");
 const sequelize = require('../../config/connection');
 const { Op } = require('sequelize');
-const { User, ClubMember, Club } = require('../../models')
+const { User, ClubMember, Club } = require('../../models');
+const { display_user } = require('../../util/helpers');
 
 router.get('/', async (req, res) => {
         const zipcode = req.query.zip || req.session.zipcode;
@@ -30,22 +31,31 @@ router.get('/', async (req, res) => {
                 console.log(nearbyZIPs);
 
                 Club.findAll({
-                    include: {
-                        model: User,
-                        as: "members",
-                        attributes: { exclude: ['password'] },
-                        attributes: ['username', 'id', 'zipcode'],
-                        where: {
-                            zipcode: {
-                                [Op.or]: nearbyZIPs
-                            }
-                        }
-                    }
+                    include: [
+                                {
+                                    model: User,
+                                    as: "members",
+                                    attributes: { exclude: ['password'] },
+                                    attributes: ['username', 'id', 'zipcode'],
+                                    where: {
+                                        zipcode: {
+                                            [Op.or]: nearbyZIPs
+                                        }
+                                    },
+                                },
+                                {
+                                    model: User,
+                                    attributes: [ 'id', 'username' ],
+                                    as: 'owner'
+                                }
+                            ]
                 }).then(dbClubData => {
                     if (!dbClubData) {
-                    res.status(404).json({ message: 'No clubs within this range' });
-                    return;
+                        res.status(404).json({ message: 'No clubs within this range' });
+                        return;
                     }
+                    dbClubData.forEach(element => element.dataValues.ownerMarkup = display_user(element.dataValues.owner));
+                    console.log(dbClubData);
                     res.json(dbClubData);
                 })
                 .catch(err => {
