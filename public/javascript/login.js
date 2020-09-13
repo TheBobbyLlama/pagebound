@@ -17,7 +17,10 @@ async function loginFormHandler(event) {
         })
 
         if (response.ok) {
-            document.location.replace('/dashboard');
+            // HACK - Going to dashboard too fast?  Had to add short delay.
+            setTimeout(() => {
+                document.location.replace('/dashboard');
+            }, 100);
         } else {
             const error = await response.json();
 

@@ -44,7 +44,8 @@ router.get('/:id/:token', async (req, res) => {
 					}
 				})
 				.then(dbUserData => {
-					res.redirect('/dashboard');
+					// BUG - The session isn't ready yet when we hit this point.  setTimeout doesn't fix it, so we'll kick the user to a redirect page instead.
+					res.render('verify-redirect');
 				});
 			});
 		} else {
