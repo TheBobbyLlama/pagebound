@@ -27,7 +27,7 @@
                 {{#if this.book_id}}
                 <div class="cell small-6 large-3 dashboard-club-book" data-id="{{this.book_id}}">
                     <p>
-                        Currently reading:<br />
+                        Currently reading:<br/>
                         <em></em>
                     </p>
                     <div id="cover_panel" class="cell small-12 large-4">
@@ -39,15 +39,9 @@
 				    </div>
                 </div>
                 <div class="cell small-6 large-9">
-<<<<<<< HEAD
-                    <p><strong>Owner:</strong> {{{display_user this.owner}}}</p>
-                    <p><strong>Members:</strong> {{this.member_count}}</p>
-                    <p><strong>Discussions:</strong> {{this.topic_count}}</p>
-=======
                     <p><strong>Owner:</strong> {{this.owner.username}}</p>
                     <p><strong>Members:</strong>&emsp;{{this.member_count}}</p>
                     <p><strong>Discussions:</strong>&emsp;{{this.topic_count}}</p>
->>>>>>> feature/looks
                     <p><strong>Last Comment:</strong> {{this.last_comment}}</p>
                     <p><a href="/club/{{this.id}}">View Club Page</a></p>
                 </div>

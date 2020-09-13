@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { DirectMessage } = require('../../models');
+const { Op } = require('sequelize');
 
 //create new direct message
 router.post('/', (req, res) => {
@@ -57,6 +58,27 @@ router.get('/received', (req, res) => {
             });
     }
 });
+
+router.get('/read', (req, res) => {
+    if (req.session) {
+        DirectMessage.findAll({
+            where: {
+                [Op.and]: [{
+                    recipient_id: req.session.user_id
+                },
+                {
+                    read: false
+                }]
+            }
+        })
+            .then(dbDMData => res.json(dbDMData))
+            .catch(err => {
+                console.log(err);
+                res.status(500).json(err);
+            });
+    }
+});
+
 //Get all messages from the logged-in user
 router.get('/sent', (req, res) => {
     if (req.session) {

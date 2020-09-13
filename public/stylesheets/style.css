@@ -86,6 +86,10 @@ ul.menu, .top-bar {
   resize: vertical;
 }
 
+.club-user-info {
+  padding-left: 2rem;
+} 
+
 /* SIGNUP STYLES*/
 /* password match styles */
 .passwords-match-false {
@@ -239,14 +243,12 @@ ul.menu, .top-bar {
   background-position: top;
 }
 
-<<<<<<< HEAD
 /* club page */
 .topic-summary + .topic-summary {
   border-top: solid 1px var(--pagebound-blue-light);
   padding-top: 10px;
 }
 
-=======
 .is-active {
   background-image: linear-gradient(0deg, rgb(255, 255, 255, .5) 20%, var(--background-light)) !important;
   border: none;
@@ -266,7 +268,6 @@ ul.menu, .top-bar {
 
 
 
->>>>>>> feature/looks
 /*cta styles*/
 .cta-filter {
   min-height: 60vh;
@@ -277,7 +278,7 @@ ul.menu, .top-bar {
 
 .cta-title {
   margin-top: 2rem;
-/*  color: #cae3e2;*/
+  text-align: right;
   color: #d0e0f0;
   font-family: 'Merriweather', serif;
   font-style: italic;

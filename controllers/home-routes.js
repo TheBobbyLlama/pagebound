@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { User } = require('../models');
 
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
@@ -57,6 +58,29 @@ router.get('/book/:title/id/:id', (req, res) => {
 router.get('/results', (req, res) => {
     res.render('results', {
         loggedIn: req.session.loggedIn
+    });
+});
+
+router.get('/send-message', (req, res) => {
+    res.render('send-message', {
+        loggedIn: req.session.loggedIn
+    });
+});
+
+router.get('/send-message/:id', (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        },
+        attributes: [ 'id', 'username' ]
+    })
+    .then(data => {
+        const user = data.get({ plain: true });
+
+        res.render('message-user', {
+            user,
+            loggedIn: req.session.loggedIn
+        });
     });
 });
 

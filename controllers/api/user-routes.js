@@ -64,8 +64,28 @@ router.get('/settings/', (req, res) => {
         })
 });
 
+//get one user by username
+router.get('/username/:username', (req, res) => {
+    User.findOne({
+        attributes: { exclude: ['password'] },
+        where: {
+            username: req.params.username
+        }
+    })
+        .then(dbUserData => {
+            if (!dbUserData) {
+            res.status(404).json({ message: 'No user found with this id' });
+            return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
-//get one user
+//get one user by id
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },

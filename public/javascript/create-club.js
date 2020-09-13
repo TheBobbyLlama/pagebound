@@ -282,7 +282,7 @@ async function addUsersToClub(clubInfo) {
 };
 
 $('#book-add-input').on('input', searchInputHandler);
-$('#book-add-input').on('focus', () => $('#add-user-dropdown').foundation('open'));
+$('#add-club-user-input').on('focus', () => $('#add-user-dropdown').foundation('open'));
 $('#create-club-form').on('submit', createClubFormHandler);
 $('#selected-user-list').on('click', 'button.user-close', removeUserHandler);
 $('#add-user-dropdown').on('click', 'li.list-group-item', addUserHandler);
