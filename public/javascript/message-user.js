@@ -28,4 +28,4 @@ async function sendMessage(event) {
 
 };
 
-$('#send-message').on('click', sendMessage);
+$('#message-form').on('submit', sendMessage);
