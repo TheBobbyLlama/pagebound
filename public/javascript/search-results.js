@@ -3,6 +3,13 @@ async function searchClickHandler() {
     const param = $('#book-search-select').val();
     const query = $('#book-search-input').val().toLowerCase();
 
+    // Don't search if the user hasn't entered anything.
+    if (!query) {
+        // Unfortunately, we can't fire the close handle immediately and prevent the modal from appearing altogether.
+        setTimeout(() => { $('#close-search').click(); }, 1);
+        return;
+    }
+
     let buildKey = "";
 
     for (let i = 0; i < shuffleKey.length; i++) {

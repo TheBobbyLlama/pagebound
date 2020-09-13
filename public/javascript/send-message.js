@@ -114,7 +114,7 @@ function addUserHandler(event) {
     $('#add-user-dropdown').foundation('close')
 }
 
-$('#send-message').on('click', sendMessage);
+$('#message-form').on('submit', sendMessage);
 $('#message-user-input').on('input',  usernameCheckHandler);
 $('#message-user-input').on('focus', () => $('#add-user-dropdown').foundation('open'));
 $('#add-user-dropdown').on('click', 'li.list-group-item', addUserHandler);
