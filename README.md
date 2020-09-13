@@ -1,3 +1,3 @@
 # Pagebound
 
-![Project Screenshot](/snapshot.png?raw=true)
+![Project Screenshot](/Snapshot.png?raw=true)
