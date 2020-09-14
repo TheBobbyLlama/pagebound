@@ -667,3 +667,31 @@ ul.menu, .top-bar {
 .squish-together > * + * {
   margin-left: 10px;
 }
+
+@media screen and (max-width: 440px) {
+  .cta-background {
+    min-height: initial;
+    width: 100%;
+    background-image: url(../images/book_open_stock.jpg);
+    background-size: cover;
+  }
+
+  .cta-p {
+    padding: 0 32px;
+    width: 100%;
+  }
+
+  .cta-title {
+    text-align: center;
+  }
+
+  .cta-mission {
+    text-align: left;
+  }
+
+  .cta-button-container {
+    text-align: center;
+    padding: 0 32px;
+    width: 100%;
+  }
+}
