@@ -98,7 +98,7 @@ router.post('/', (req, res) => {
 });
 
 //add user to club
-router.put('/add', (req, res) => {
+router.post('/add', (req, res) => {
     ClubMember.create({
         user_id: req.body.user_id,
         club_id: req.body.club_id
