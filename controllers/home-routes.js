@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, DirectMessage } = require('../models');
+const sequelize = require('../config/connection');
 
 router.get('/', (req, res) => {
     if (req.session.loggedIn) {
@@ -50,6 +51,24 @@ router.get('/results', (req, res) => {
     res.render('results', {
         loggedIn: req.session.loggedIn
     });
+});
+
+router.get('/inbox', (req, res) => {
+    DirectMessage.findAll({
+        order: sequelize.literal('created_at DESC'),
+        where: {
+            recipient_id: req.session.user_id
+        }
+    }).then(data => {
+        const messages = data.map(message => message.get({ plain: true }));
+        console.log('HERE THEY ARE!', messages);
+
+        res.render('inbox', {
+            messages,
+            loggedIn: req.session.loggedIn
+        });
+    });
+    
 });
 
 router.get('/send-message', (req, res) => {
