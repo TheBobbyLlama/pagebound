@@ -93,11 +93,20 @@ router.post('/', (req, res) => {
     // check the session
     if (req.session) {
         DiscussionTopic.create({
-            title: req.body.title,
+            title: req.body.topic_title,
             book_id: req.body.book_id,
-            club_id: req.body.club_id
+            club_id: req.body.club_id,
         })
-            .then(dbTopicData => res.json(dbTopicData))
+            .then(dbTopicData => {
+                DiscussionComment.create({
+                    discussion_id: dbTopicData.id,
+                    user_id: req.session.user_id,
+                    comment_text: req.body.topic_text
+                })
+                .then(dbCommentData => {
+                    res.json(dbTopicData);
+                });
+            })
             .catch(err => {
                 console.log(err);
                 res.status(400).json(err);

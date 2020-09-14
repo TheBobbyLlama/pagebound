@@ -9,7 +9,7 @@
 				</div>
 				<div class="cell small-6 large-9">
 					<h2>{{thread.title}}</h2>
-					<h4><span></span> - <small>{{thread.club.name}}</small></h4>
+					<h4><span></span> - <small><a href="/club/{{thread.club.id}}">{{thread.club.name}}</a></small></h4>
 				</div>
 			</div>
 			{{> comment-view thread.discussion_comments}}

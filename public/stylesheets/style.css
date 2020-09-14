@@ -303,7 +303,10 @@ ul.menu, .top-bar {
   padding-right: 1rem;
 }
 
-
+#new-discussion-form textarea {
+  height: 200px;
+  resize: vertical;
+}
 
 /*cta styles*/
 .cta-filter {
@@ -644,6 +647,10 @@ ul.menu, .top-bar {
   }
 
 /* Utility classes */
+.background-light {
+  background-color: var(--background-light);
+}
+
 .spread-out {
   display: flex;
   flex-wrap: wrap;
