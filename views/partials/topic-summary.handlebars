@@ -1,0 +1,14 @@
+{{#each this}}
+<div class="topic-summary">
+	<div class="spread-out">
+		<div>
+			<a href="/discussion/{{this.id}}"><strong>{{this.title}}</strong></a><br />
+			by {{{display_user this.author}}}
+		</div>
+		<div style="text-align: right;">
+			{{this.comment_count}} {{format_plural "comment" this.comment_count}}<br />
+			Last post: <em>{{format_date this.last_comment}}</em>
+		</div>
+	</div>
+</div>
+{{/each}}

@@ -1,0 +1,697 @@
+:root {
+  --body-color: #f8faff;
+  --background-light: #e8f0f8;
+  --pagebound-blue: #506880;
+  --pagebound-blue-light: #80a0c0;
+}
+
+body {
+  background-color: var(--body-color);
+}
+
+*:focus {
+    outline: none;
+}
+.button, input, .card {
+  border-radius: 7px !important;
+}
+
+.callout {
+  border-radius: 0;
+}
+
+li.page-title {
+  padding: 0 !important;
+}
+
+.button {
+  background-color: var(--pagebound-blue);
+}
+
+.button:hover {
+  background-color: var(--pagebound-blue-light);
+}
+
+.button:active {
+  background-color: var(--background-light);
+}
+
+.page-title a {
+  display: block;
+  font-family: 'Montserrat Alternates', sans-serif !important;
+  color: var(--pagebound-blue);
+}
+
+*[data-user-id] {
+  font-weight: bold;
+  color: var(--pagebound-blue);
+}
+
+*[data-user-id] *.foundicon-mail:before {
+  color: var(--pagebound-blue);
+  transition: 0.5s;
+}
+
+*[data-user-id] *.foundicon-mail:hover:before {
+  color: var(--pagebound-blue-light);
+}
+
+a[role='menuitem'], div[data-id] a, .book-section a, #create-club-form a.flex-container, #sale_info a {
+  color: var(--pagebound-blue);
+  transition: 0.5s;
+}
+
+.page-title a:hover, a[role='menuitem']:hover, div[data-id] a:hover, .book-section a:hover, #create-club-form a.flex-container:hover, #sale_info a:hover {
+  color: var(--pagebound-blue-light);
+}
+
+.is-dropdown-submenu-parent a::after {
+  border-color: var(--pagebound-blue) transparent transparent !important;
+}
+
+ul.menu, .top-bar {
+  background-color: var(--background-light);
+}
+
+.card-divider, .card-divider small {
+  background-color: var(--pagebound-blue);
+  color: var(--background-light);
+}
+
+.card-divider a {
+  color: var(--background-light) !important;
+}
+
+.card-divider a:hover {
+  color: white !important;
+}
+
+.card-divider .button {
+  background-color: var(--background-light);
+  border: solid 1px var(--pagebound-blue-light);
+  color: var(--pagebound-blue);
+  margin: 0;
+}
+
+.card-divider .button:hover {
+  background-color: var(--body-color);
+  color: var(--pagebound-blue-light);
+}
+
+.card-divider.comment {
+  background-color: var(--background-light);
+  border-top: solid 1px var(--pagebound-blue-light);
+  color: var(--pagebound-blue);
+}
+
+.comment-toolbar .button {
+  margin: 0px;
+}
+
+#newComment {
+  height: 200px;
+  resize: vertical;
+}
+
+.club-user-info {
+  padding-left: 2rem;
+} 
+
+/* SIGNUP STYLES*/
+/* password match styles */
+.passwords-match-false {
+    border-color: red;
+}
+.passwords-match-false:focus {
+    border-color: red;
+}
+
+.passwords-match-true {
+    border-color: green;
+}
+.passwords-match-true:focus {
+    border-color: green;
+}
+/* password match styles end */
+
+/* blank field styles */
+.blank-field {
+    border-color: red;
+}
+.blank-field:focus {
+    border-color: red;
+}
+/* blank field styles end */
+
+.menu-text {
+    margin-left: 60px;
+    position: relative;
+    vertical-align: center;
+}
+
+.menu-text::before {
+	background-image: url('../images/logo-sm.png');
+	background-size: cover;
+	content: '';
+	display: inline-block;
+	position: absolute;
+	height: 24px;
+  left: -54px;
+  top: 8px;
+	width: 60px;
+}
+/* SIGNUP STYLES END*/
+
+/* searchbar styles */
+#book-search-input {
+    border-left: none;
+    border-radius: 0 !important;
+}
+
+#book-add-input {
+    border-left: none;
+    border-radius: 0 7px 7px 0 !important;
+}
+
+#book-search-select, #book-add-select {
+  border-radius: 7px 0 0 7px !important;
+  background-color: #f8faff;
+    color: var(--pagebound-blue);
+}
+
+#book-search-submit {
+  border-radius: 0 7px 7px 0 !important;
+  margin-left: 0 !important;
+}
+
+.no-image-found {
+    position: absolute;
+}
+/* searchbar styles end */
+
+/* club search styles */
+#zip-distance {
+  margin: 0 1rem 0 1rem;
+}
+
+.club-result-title {
+  background-color: var(--pagebound-blue);
+  color: white;
+}
+
+#zip-search-results {
+  border-color: var(--pagebound-blue);
+}
+
+.club-search-item {
+  border-color: var(--pagebound-blue);
+  margin: 0;
+}
+
+.club-search-card {
+  border: none;
+  border-radius: 0 !important;
+}
+
+.book-section {
+  background:#e6e6e6;
+  padding: .3rem 1.5rem 1rem 1rem;
+}
+
+.club-card-section {
+  padding: 0;
+}
+
+.group-page-button {
+  margin: 1rem;
+}
+/* club search styles end */
+
+/* dashboard styles */
+
+#dashboard-container {
+  background-color: var(--background-light) !important;
+  margin:0;
+  max-width: initial;
+  padding: 0;
+  width: 100%;
+}
+
+.dashboard-menu, #dashboard-container {
+  background-color: var(--background-light) !important;
+}
+
+.dashboard-menu .button {
+  background-color: var(--background-light);
+  border-radius: 0 !important;
+}
+
+.dashboard-menu .button:hover {
+  background-color: var(--background-light);
+  border-radius: 0 !important;
+}
+
+.club-card {
+  border-radius: 0 !important;
+}
+
+.welcome-back {
+  color: var(--pagebound-blue);
+  margin-top: 0.5em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.welcome-subtitle {
+  color: var(--pagebound-blue);
+  font-size: larger;
+}
+
+#club-summary #cover_panel {
+  background-position: top;
+}
+
+/* club page */
+.topic-summary a strong {
+  color: var(--pagebound-blue);
+  font-size: 1.15em;
+  transition: 0.5s;
+}
+
+.topic-summary a:hover strong {
+  color: var(--pagebound-blue-light);
+}
+
+.topic-summary + .topic-summary {
+  border-top: solid 1px var(--pagebound-blue-light);
+  padding-top: 10px;
+}
+
+.is-active {
+  background-image: linear-gradient(0deg, rgb(255, 255, 255, .5) 20%, var(--background-light)) !important;
+  border: none;
+}
+
+.dropdown.menu>li.is-active>a {
+  color: var(--pagebound-blue) !important;
+}
+
+.dropdown.menu>li.is-active>a:hover {
+  color: var(--pagebound-blue-light) !important;
+}
+
+.dashboard-club-book {
+  padding-right: 1rem;
+}
+
+#new-discussion-form textarea {
+  height: 200px;
+  resize: vertical;
+}
+
+/*cta styles*/
+.cta-filter {
+  min-height: 60vh;
+  width: 100%;
+  background-color: rgb(255, 255, 255, 0.2);
+  text-align: right;
+}
+
+.cta-title {
+  margin-top: 2rem;
+  text-align: right;
+  color: #d0e0f0;
+  font-family: 'Merriweather', serif;
+  font-style: italic;
+  text-shadow: 0 0 10px rgb(0, 0, 0, 0.4);
+  font-size: 3rem;
+}
+
+.cta-background {
+  min-height: 60vh;
+  width: 100vw;
+  background-image: url(../images/book_open_stock.jpg);
+  background-size: 130%;
+  background-position: 100% 0%; 
+}
+
+.cta-mission {
+  font-family: 'Merriweather', serif;
+  font-size: 1.3rem;
+  font-weight: lighter;
+  text-shadow: 0 0 10px rgb(0, 0, 0);
+  color: white;
+  width: 100%;
+  padding-right: 2rem;
+  margin-top: 1rem;
+}
+
+.cta-p {
+  width: 30%;
+}
+
+.cta-button-container {
+  width: 30%;
+  padding: 0 2rem 0 0;
+}
+
+.cta-button {
+  font-family: 'Merriweather', serif;
+  font-size: 1.5rem;
+  background-color: rgb(30, 30, 30, 0.5);
+}
+
+.cta-button:hover {
+  background-color: rgb(80, 80, 80);
+}
+/*cta styles end*/
+
+
+
+
+
+/* list group style */
+.list-group {
+    margin: none !important;
+    border: 1px solid lightgray;
+    background: white;
+    box-shadow: none;
+    overflow: hidden;
+    color: black;
+  }
+  .list-group > :last-child {
+    margin-bottom: 0;
+  }
+  
+  .list-group-item {
+    padding: 1rem;
+    border-bottom: 1px solid lightgray;
+  }
+  .list-group-item > :last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+  .list-group-item:hover, .list-group-item:focus {
+    background-color: lightgray;
+  }
+  .selected-user-list:hover, .selected-user-list:focus {
+      background-color: white;
+  }
+
+.selected-user-list {
+    padding: .5rem 1rem;
+}
+
+#add-user-dropdown {
+    padding: 0px !important;
+    z-index: 11 !important;
+}
+
+#add-user-dropdown-list, #selected-user-list {
+    margin: 0px;
+}
+
+#selected-user-list {
+    margin-bottom: 1rem;
+}
+/* list group style end */
+
+/* book page styles */
+#cover_panel {
+  background-image: url('../images/cover-loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 200px;
+}
+
+.club-list + .club-list {
+  border-top: solid 1px var(--pagebound-blue-light);
+}
+/* book page styles end */
+
+/* font-face */
+@font-face {
+    font-family: "GeneralFoundicons";
+    src: url("../fonts/general_foundicons.eot");
+    src: url("../fonts/general_foundicons.eot?#iefix") format("embedded-opentype"), url("../fonts/general_foundicons.woff") format("woff"), url("../fonts/general_foundicons.ttf") format("truetype"), url("../fonts/general_foundicons.svg#GeneralFoundicons") format("svg");
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  /* global foundicon styles */
+  [class*="foundicon-"] {
+    display: inline;
+    line-height: inherit;
+    vertical-align: baseline;
+    background-image: none;
+    background-position: 0 0;
+    background-repeat: repeat;
+  }
+  
+  [class*="foundicon-"]:before {
+    font-family: "GeneralFoundicons";
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: inherit;
+  }
+  
+  /* icons */
+  .foundicon-settings:before {
+    content: "\f000";
+  }
+  
+  .foundicon-heart:before {
+    content: "\f001";
+  }
+  
+  .foundicon-star:before {
+    content: "\f002";
+  }
+  
+  .foundicon-plus:before {
+    content: "\f003";
+  }
+  
+  .foundicon-minus:before {
+    content: "\f004";
+  }
+  
+  .foundicon-checkmark:before {
+    content: "\f005";
+  }
+  
+  .foundicon-remove:before {
+    content: "\f006";
+  }
+  
+  .foundicon-mail:before {
+    content: "\f007";
+    position: relative;
+    top: 2px;
+  }
+  
+  .foundicon-calendar:before {
+    content: "\f008";
+  }
+  
+  .foundicon-page:before {
+    content: "\f009";
+  }
+  
+  .foundicon-tools:before {
+    content: "\f00a";
+  }
+  
+  .foundicon-globe:before {
+    content: "\f00b";
+  }
+  
+  .foundicon-home:before {
+    content: "\f00c";
+  }
+  
+  .foundicon-quote:before {
+    content: "\f00d";
+  }
+  
+  .foundicon-people:before {
+    content: "\f00e";
+  }
+  
+  .foundicon-monitor:before {
+    content: "\f00f";
+  }
+  
+  .foundicon-laptop:before {
+    content: "\f010";
+  }
+  
+  .foundicon-phone:before {
+    content: "\f011";
+  }
+  
+  .foundicon-cloud:before {
+    content: "\f012";
+  }
+  
+  .foundicon-error:before {
+    content: "\f013";
+  }
+  
+  .foundicon-right-arrow:before {
+    content: "\f014";
+  }
+  
+  .foundicon-left-arrow:before {
+    content: "\f015";
+  }
+  
+  .foundicon-up-arrow:before {
+    content: "\f016";
+  }
+  
+  .foundicon-down-arrow:before {
+    content: "\f017";
+  }
+  
+  .foundicon-trash:before {
+    content: "\f018";
+  }
+  
+  .foundicon-add-doc:before {
+    content: "\f019";
+  }
+  
+  .foundicon-edit:before {
+    content: "\f01a";
+  }
+  
+  .foundicon-lock:before {
+    content: "\f01b";
+  }
+  
+  .foundicon-unlock:before {
+    content: "\f01c";
+  }
+  
+  .foundicon-refresh:before {
+    content: "\f01d";
+  }
+  
+  .foundicon-paper-clip:before {
+    content: "\f01e";
+  }
+  
+  .foundicon-video:before {
+    content: "\f01f";
+  }
+  
+  .foundicon-photo:before {
+    content: "\f020";
+  }
+  
+  .foundicon-graph:before {
+    content: "\f021";
+  }
+  
+  .foundicon-idea:before {
+    content: "\f022";
+  }
+  
+  .foundicon-mic:before {
+    content: "\f023";
+  }
+  
+  .foundicon-cart:before {
+    content: "\f024";
+  }
+  
+  .foundicon-address-book:before {
+    content: "\f025";
+  }
+  
+  .foundicon-compass:before {
+    content: "\f026";
+  }
+  
+  .foundicon-flag:before {
+    content: "\f027";
+  }
+  
+  .foundicon-location:before {
+    content: "\f028";
+  }
+  
+  .foundicon-clock:before {
+    content: "\f029";
+  }
+  
+  .foundicon-folder:before {
+    content: "\f02a";
+  }
+  
+  .foundicon-inbox:before {
+    content: "\f02b";
+  }
+  
+  .foundicon-website:before {
+    content: "\f02c";
+  }
+  
+  .foundicon-smiley:before {
+    content: "\f02d";
+  }
+  
+  .foundicon-search:before {
+    content: "\f02e";
+  }
+
+/* Utility classes */
+.background-light {
+  background-color: var(--background-light);
+}
+
+.spread-out {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.squish-together {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.squish-together > * + * {
+  margin-left: 10px;
+}
+
+@media screen and (max-width: 440px) {
+  .cta-background {
+    min-height: initial;
+    width: 100%;
+    background-image: url(../images/book_open_stock.jpg);
+    background-size: cover;
+  }
+
+  .cta-p {
+    padding: 0 32px;
+    width: 100%;
+  }
+
+  .cta-title {
+    text-align: center;
+  }
+
+  .cta-mission {
+    text-align: left;
+  }
+
+  .cta-button-container {
+    text-align: center;
+    padding: 0 32px;
+    width: 100%;
+  }
+}

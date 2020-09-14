@@ -1,0 +1,98 @@
+<div id="dashboard-container" class="grid-container">
+    <div class="grid-x align-center">
+        <div class="cell small-12">
+            <ul class="dropdown menu dashboard-menu flex-container align-justify" data-dropdown-menu>    
+                <div class="dropdown menu flex-container" data-dropdown-menu>
+                    <li style="position: relative; top: -3px;"><a href="#"><i class="foundicon-mail"></i>&emsp;Messages</a></li>
+                    <li><a href="/club-search" class="button light middle"><i class="fi-list foundicon-location"></i>&emsp;Find Clubs Near Me</a></li>
+                    <li><a href="/create-club" class="button light right"><i class="fi-list foundicon-plus"></i>&emsp;Create a Club</a></li>
+                </div>
+                <li><a href="/change-user-settings" class="button"><i class="fi-list foundicon-settings"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center">
+		<div class="cell small-12 large-10 card" style="margin-top: 2rem;">
+			<div class="card-divider"><h3>{{club.name}}</h3></div>
+			<div class="card-section grid-x">
+				{{#if club.book_id}}
+                <div class="cell small-6 large-3" data-id="{{club.book_id}}">
+                    <p>
+                        Currently Reading:<br />
+                        <span></span>
+                    </p>
+                    <div id="cover_panel" class="cell small-12 large-4">
+                {{else}}
+                <div class="cell small-6 large-3">
+                    <p><em>No book selected</em></p>
+                    <div id="cover_panel" class="cell small-12 large-4" style="background-image: url('/images/logo.png'); opacity: 0.5;">
+                {{/if}}
+				    </div>
+                </div>
+				<div class="cell small-6 large-9 club-user-info">
+					<p><strong>Owner:</strong><br>{{{display_user club.owner}}}</p>
+					<p><strong>Members:</strong><br>{{{display_userlist club.members club.owner.username}}}</p>
+					{{#if isOwner}}
+					<div class="align-bottom">
+						<button type="button" class="button" id="changeBookButton" data-open='add-book-modal'>Change Book</button>
+					</div>
+					{{/if}}
+				</div>
+			</div>
+			{{#if club.book_id}}
+			<div class="card-divider grid-x spread-out">
+				<div>Current Discussions</div>
+				{{#if inClub}}
+				<button type="button" class="button" onclick="window.location.assign('/club/{{club.id}}/newtopic/{{club.book_id}}')">Start a Discussion</button>
+				{{/if}}
+			</div>
+			{{/if}}
+			{{#if club.currentTopics.length}}
+			<div class="card-section">
+				{{> topic-summary club.currentTopics}}
+			</div>
+			{{/if}}
+			{{#if club.priorTopics.length}}
+			<div class="card-divider">Previous Discussions</div>
+			{{#each club.priorTopics}}
+			<div class="card-section grid-x">
+				<div class="cell small-6 large-3" data-id="{{this.book_id}}">
+                    <p><em></em></p>
+                    <div id="cover_panel" class="cell small-12 large-4">
+					</div>
+				</div>
+				<div class="cell small-6 large-9">
+					{{> topic-summary this.topics}}
+				</div>
+			</div>
+			{{/each}}
+			{{/if}}
+		</div>
+	</div>
+</div>
+<!-- add book modal -->
+<div class="reveal" id="add-book-modal" data-club-id={{club.id}} data-reveal>
+	<div class="grid-container" style="max-height: 70vh;">
+		<div class="flex-container" style="margin-right: 1rem;">
+			<select id="book-add-select" style="flex-basis: 20%">
+				<option value="intitle">Title</option>
+				<option value="inauthor">Author</option>
+			</select>   
+			<input type="search" placeholder="Search" id="book-add-input" style="flex-basis: 80%" autocomplete="off">
+		</div>
+		<!-- loading gif -->
+		<div class="cell medium-cell-block-y" id="book-add-results">
+			Search books by title or author.
+		</div>
+	</div>
+	<button class="close-button" data-close aria-label="Close modal" type="button">
+			<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<script src="/javascript/load-book-details.js"></script>
+{{#if isOwner}}
+<script src="/javascript/club-management.js"></script>
+{{/if}}

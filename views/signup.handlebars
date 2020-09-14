@@ -1,0 +1,63 @@
+<div class="grid-container">
+    <div class="grid-x grid-margin-x align-center align-middle" style="height: 90vh;">
+        <div class="cell small-12 large-6 card" style="margin-top: 1rem;">
+            <div class="card-divider">Sign Up as a Pagebound User</div>
+            <div class="card-section">
+                <form id="signup-form">
+                    <p style="font-style: italic; text-align: right;">* indicates required field.</p>
+                    <div class="callout alert hide" id="blank-required">
+                        <p>Required fields have been left blank.</p>
+                    </div>
+                    <div class="callout alert hide" id="invalid-email">
+                        <p>Invalid email address.</p>
+                    </div>
+                    <div class="callout alert hide" id="email-taken">
+                        <p>Email address already in use.</p>
+                    </div>
+                    <div class="small-12 cell">
+                        <label>Email*
+                            <input type="email" placeholder="example@user.com" id="email-signup">
+                        </label>
+                    </div>
+                    <div class="callout alert hide" id="username-alert">
+                        <p>Username already taken.</p>
+                    </div>
+                    <div class="small-12 cell">
+                        <label>Username*
+                            <input type="text" id="username-signup" autocomplete="off">
+                        </label>
+                    </div>
+                    <div class="callout alert hide" id="zip-alert">
+                        <p>Invalid zipcode.</p>
+                    </div>
+                    <div class="small-12 cell">
+                        <label>Zipcode
+                            <input type="text" placeholder="90210" id="zipcode-signup">
+                        </label>
+                    </div>
+                    <div class="callout alert hide" id="pass-match-alert">
+                        <p>Passwords do not match.</p>
+                    </div>
+                    <div class="small-12 cell">
+                        <label>Password*
+                            <input type="password" id="password-take-one">
+                        </label>
+                    </div>
+                    <div class="small-12 cell">
+                        <label>Type Password Again
+                            <input type="password" id="password-signup">
+                        </label>
+                    </div>
+                    <div class="flex-container align-middle">
+                        <button type="submit" class="button" style="margin-right: 5px;">Sign Up!</button>
+                    </div>
+                    <div class="callout success hide" id="signup_success">
+                        <p>Thank you for signing up for Pagebound!</p>
+                        <p>Please check your email to finish setting up your account.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/javascript/signup.js"></script>
