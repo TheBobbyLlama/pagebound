@@ -1,11 +1,12 @@
 :root {
+  --body-color: #f8faff;
   --background-light: #e8f0f8;
   --pagebound-blue: #506880;
   --pagebound-blue-light: #80a0c0;
 }
 
 body {
-  background-color: #f8faff;
+  background-color: var(--body-color);
 }
 
 *:focus {
@@ -31,6 +32,10 @@ li.page-title {
   background-color: var(--pagebound-blue-light);
 }
 
+.button:active {
+  background-color: var(--background-light);
+}
+
 .page-title a {
   display: block;
   font-family: 'Montserrat Alternates', sans-serif !important;
@@ -42,12 +47,21 @@ li.page-title {
   color: var(--pagebound-blue);
 }
 
-a[role='menuitem'], #create-club-form a.flex-container {
+*[data-user-id] *.foundicon-mail:before {
   color: var(--pagebound-blue);
   transition: 0.5s;
 }
 
-.page-title a:hover, a[role='menuitem']:hover, #create-club-form a.flex-container:hover {
+*[data-user-id] *.foundicon-mail:hover:before {
+  color: var(--pagebound-blue-light);
+}
+
+a[role='menuitem'], div[data-id] a, .book-section a, #create-club-form a.flex-container, #sale_info a {
+  color: var(--pagebound-blue);
+  transition: 0.5s;
+}
+
+.page-title a:hover, a[role='menuitem']:hover, div[data-id] a:hover, .book-section a:hover, #create-club-form a.flex-container:hover, #sale_info a:hover {
   color: var(--pagebound-blue-light);
 }
 
@@ -64,11 +78,24 @@ ul.menu, .top-bar {
   color: var(--background-light);
 }
 
+.card-divider a {
+  color: var(--background-light) !important;
+}
+
+.card-divider a:hover {
+  color: white !important;
+}
+
 .card-divider .button {
   background-color: var(--background-light);
   border: solid 1px var(--pagebound-blue-light);
   color: var(--pagebound-blue);
   margin: 0;
+}
+
+.card-divider .button:hover {
+  background-color: var(--body-color);
+  color: var(--pagebound-blue-light);
 }
 
 .card-divider.comment {
@@ -244,6 +271,16 @@ ul.menu, .top-bar {
 }
 
 /* club page */
+.topic-summary a strong {
+  color: var(--pagebound-blue);
+  font-size: 1.15em;
+  transition: 0.5s;
+}
+
+.topic-summary a:hover strong {
+  color: var(--pagebound-blue-light);
+}
+
 .topic-summary + .topic-summary {
   border-top: solid 1px var(--pagebound-blue-light);
   padding-top: 10px;
@@ -382,6 +419,10 @@ ul.menu, .top-bar {
   background-repeat: no-repeat;
   background-size: contain;
   min-height: 200px;
+}
+
+.club-list + .club-list {
+  border-top: solid 1px var(--pagebound-blue-light);
 }
 /* book page styles end */
 

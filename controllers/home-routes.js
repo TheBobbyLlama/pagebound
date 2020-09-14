@@ -45,15 +45,6 @@ router.get('/change-user-settings', (req, res) => {
     });
 });
 
-// Book info route.
-router.get('/book/:title/id/:id', (req, res) => {
-    res.render('book-info', {
-        loggedIn: req.session.loggedIn,
-        title: req.params.title,
-        id: req.params.id,
-        amazonUrl: req.params.title.toLowerCase().split(' ').join('+')
-    });
-});
 
 router.get('/results', (req, res) => {
     res.render('results', {

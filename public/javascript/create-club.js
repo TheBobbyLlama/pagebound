@@ -65,6 +65,10 @@ async function searchInputResults() {
     const param = $('#book-add-select').val();
     const query = $('#book-add-input').val().toLowerCase().split(' ').join('+');
 
+    if (!query) {
+        return;
+    }
+
     $('#book-add-results').html(`<div style="text-align: center;"><img src="images/working.gif" /></div>`);
 
     let buildKey = "";

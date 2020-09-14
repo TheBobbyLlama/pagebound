@@ -9,7 +9,8 @@ async function distanceSearchHandler() {
         
         clubData.forEach(async (club) => {
             let title = 'No Current Book';
-            let cover = '/images/logo.png'
+            let cover = '/images/logo.png';
+            let bookMarkup = `<strong>${title}</strong>`;
 
             if (club.book_id !== null) {
                 let buildKey = "";
@@ -24,6 +25,7 @@ async function distanceSearchHandler() {
                     const bookInfo = await bookFetch.json();
                     title = bookInfo.volumeInfo.title;
                     cover = bookInfo.volumeInfo.imageLinks.thumbnail;
+                    bookMarkup = `<a href="/book/${encodeURIComponent(title)}/id/${club.book_id}" style="margin: 0;"><strong>${title}</strong></a>`
                 }
             }
 
@@ -36,7 +38,7 @@ async function distanceSearchHandler() {
                     <div class="card-section grid-x align-justify club-card-section">
                         <div class="flex-container book-section" style="flex-direction: column;">
                             <strong class="currently-reading-label">Currently Reading:</strong>
-                            <a href="" style="margin: 0;"><strong>${title}</strong></a>
+                            ${bookMarkup}
                             <img src="${cover}" style="height: 150px; width: auto;">
                         </div>
                         <div class="flex-container align-justify align-right" style="flex-direction: column;">

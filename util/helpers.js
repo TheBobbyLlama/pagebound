@@ -1,6 +1,5 @@
-// TODO - Additional markup for DMs!
 const display_user = (user) => {
-	return `<span data-user-id="${user.id}">${user.username}&emsp;</span><a href="../send-message/${user.id}"><i class="foundicon-mail"></i></a>`;
+	return `<span data-user-id="${user.id}">${user.username} <a href="../send-message/${user.id}"><i class="foundicon-mail"></i></a></span>`;
 }
 
 module.exports = {

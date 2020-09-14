@@ -18,10 +18,10 @@ const loadBookData = async function() {
 			const data = await response.json();
 			var tmpElement;
 			
-			tmpElement = bookQueue[i].querySelector('em');
+			tmpElement = bookQueue[i].querySelector('span');
 
 			if (tmpElement) {
-				tmpElement.innerText = data.volumeInfo.title;
+				tmpElement.innerHTML = `<a href="/book/${encodeURIComponent(data.volumeInfo.title)}/id/${book_id}"><strong>${data.volumeInfo.title}</strong></a>`;
 			}
 
 			tmpElement = bookQueue[i].querySelector('#cover_panel');
