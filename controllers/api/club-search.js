@@ -2,7 +2,6 @@ const router = require('express').Router();
 //const session = require('express-session');
 const fetch = require("node-fetch");
 const sequelize = require('../../config/connection');
-const { Op } = require('sequelize');
 const { User, ClubMember, Club } = require('../../models');
 const { display_user } = require('../../util/helpers');
 

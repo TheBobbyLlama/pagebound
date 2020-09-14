@@ -25,7 +25,7 @@
         {{#each messages as |message|}}
         <div class="grid-x align-center">
             <div class="cell">
-                <a href="/inbox/{{message.id}}">
+                <a href="/inbox/{{message.id}}" class="message-link">
                     <div class="card-divider comment spread-out message-title">
                         <div class="username-inbox">{{message.sender_id}}</div>
                         <div>{{format_date_message this.createdAt}} <span class="unread">{{#if message.read}}{{else}}UNREAD{{/if}}</span> </div>
