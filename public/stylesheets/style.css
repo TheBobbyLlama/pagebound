@@ -86,6 +86,11 @@ ul.menu, .top-bar {
   resize: vertical;
 }
 
+.unread {
+  background-color: var(--pagebound-blue);
+  color: white;
+}
+
 .club-user-info {
   padding-left: 2rem;
 } 

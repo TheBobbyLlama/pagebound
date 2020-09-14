@@ -1,0 +1,44 @@
+
+<div id="dashboard-container" class="grid-container">
+    <div class="grid-x align-center">
+        <div class="cell small-12">
+            <ul class="dropdown menu dashboard-menu flex-container align-justify" data-dropdown-menu>    
+                <div class="dropdown menu flex-container" data-dropdown-menu>
+                    <li style="position: relative; top: -3px;"><a href="/inbox"><i class="foundicon-mail"></i>&emsp;Messages</a></li>
+                    <li><a href="/club-search" class="button light middle"><i class="fi-list foundicon-location"></i>&emsp;Find Clubs Near Me</a></li>
+                    <li><a href="/create-club" class="button light right"><i class="fi-list foundicon-plus"></i>&emsp;Create a Club</a></li>
+                </div>
+                <li><a href="/change-user-settings" class="button"><i class="fi-list foundicon-settings"></i>&emsp;Account Settings</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="grid-container">
+    <div class='grid-x align-middle align-center'>
+        <div class="card">
+            <div class="grid-x grid-margin-y align-center">
+            <div class="card-divider cell small-12 medium-10 large-8 align-right">
+                <a href="/send-message"><button class="button">Compose Message</button></a>
+            </div>
+        </div>
+        {{#each messages as |message|}}
+        <div class="grid-x grid-margin-y align-center">
+            <div class="cell small-12 medium-10 large-8">
+            <a href="/message/{{message.id}}">
+                <div class="card-divider comment spread-out {{#if message.read}}read{{else}}unread{{/if}}">
+                    <div id="username-inbox"></div>
+                    <div>{{format_date this.createdAt}}</div>
+                </div>
+            </a>
+            <div class="card-section">
+                <p>
+                    {{message.subject}}
+                </p>
+            </div>
+        </div>
+        </div>
+        {{/each}}
+        
+    </div>
+</div>
+</div>

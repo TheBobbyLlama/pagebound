@@ -26,7 +26,8 @@ router.put('/:id', (req, res) => {
     if (req.session) {
         DirectMessage.update({ read: true }, {
             where: {
-                id: req.params.id
+                id: req.params.id,
+                order: ['id', 'DESC']
             }
         })
             .then(dbDMData => {
