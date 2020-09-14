@@ -43,7 +43,7 @@ router.get('/:id', (req, res) => {
 
         res.render('thread', {
 			loggedIn: req.session.loggedIn,
-			inClub: !!threadData.club.members.find(item => item.id == req.params.id),
+			inClub: !!threadData.club.members.find(item => item.id == req.session.user_id),
             thread: threadData
 		});
 		

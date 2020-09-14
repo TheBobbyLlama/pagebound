@@ -81,6 +81,14 @@ router.get('/:id', (req, res) => {
 	});
 });
 
+router.get('/:id/newtopic/:book_id', (req, res) => {
+	res.render('create-discussion', {
+		loggedIn: req.session.loggedIn,
+		club_id: req.params.id,
+		book_id: req.params.book_id
+	});
+});
+
 function pullBookDiscussions(topics, id) {
 	return topics.filter(element => element.book_id === id);
 }

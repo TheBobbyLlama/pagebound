@@ -36,12 +36,14 @@
 					<p><strong>Members:</strong><br>{{{display_userlist club.members club.owner.username}}}</p>
 				</div>
 			</div>
+			{{#if club.book_id}}
 			<div class="card-divider grid-x spread-out">
 				<div>Current Discussions</div>
 				{{#if inClub}}
-				<button type="button" class="button">Start a Discussion</button>
+				<button type="button" class="button" onclick="window.location.assign('/club/{{club.id}}/newtopic/{{club.book_id}}')">Start a Discussion</button>
 				{{/if}}
 			</div>
+			{{/if}}
 			{{#if club.currentTopics.length}}
 			<div class="card-section">
 				{{> topic-summary club.currentTopics}}
