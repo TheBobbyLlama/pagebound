@@ -66,15 +66,14 @@ router.get('/:id', (req, res) => {
 			});
 		});
 		
-		console.log(clubData);
-		//console.log(clubData.discussion_topics.map(element => element.discussion_comments));
+		//console.log(clubData);
 
         res.render('club', {
 			loggedIn: req.session.loggedIn,
-			isOwner: (clubData.owner_id === req.session.user_id),
+			isOwner: (clubData.owner_id == req.session.user_id),
+			inClub: !!(clubData.members.find(element => element.id == req.session.user_id)),
             club: clubData
 		});
-		
 	})
 	.catch(err => {
 		console.log(err);
