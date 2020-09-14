@@ -61,15 +61,27 @@ router.get('/inbox', (req, res) => {
         }
     }).then(data => {
         const messages = data.map(message => message.get({ plain: true }));
-        console.log('HERE THEY ARE!', messages);
-
         res.render('inbox', {
             messages,
             loggedIn: req.session.loggedIn
         });
-    });
-    
+    }); 
 });
+
+router.get('/inbox/:id', (req, res) => {
+    DirectMessage.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(data => {
+        const message = data.get({ plain: true });
+        res.render('direct-message', {
+            message,
+            loggedIn: req.session.loggedIn
+        });
+    }); 
+});
+
 
 router.get('/send-message', (req, res) => {
     res.render('send-message', {

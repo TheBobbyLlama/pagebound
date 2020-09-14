@@ -114,8 +114,15 @@ ul.menu, .top-bar {
 }
 
 .unread {
-  background-color: var(--pagebound-blue);
-  color: white;
+  font-size: small;
+  color: red !important;
+}
+
+.inbox {
+  margin-top: 2rem;
+  border: 2px solid var(--pagebound-blue);
+  background-color: lightgray;
+  border-radius: 7px 7px 0 0 !important;
 }
 
 .club-user-info {
