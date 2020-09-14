@@ -69,7 +69,7 @@ async function searchInputResults() {
         return;
     }
 
-    $('#book-add-results').html(`<div style="text-align: center;"><img src="images/working.gif" /></div>`);
+    $('#book-add-results').html(`<div style="text-align: center;"><img src="/images/working.gif" /></div>`);
 
     let buildKey = "";
 
