@@ -35,6 +35,23 @@
 					<p><strong>Owner:</strong><br>{{{display_user club.owner}}}</p>
 					<p><strong>Members:</strong><br>{{{display_userlist club.members club.owner.username}}}</p>
 					{{#if isOwner}}
+					<form id="add-user-form" class="grid-x grid-margin-x" data-club-id="{{club.id}}">
+						<div class="cell small-12 large-8">
+							<input type="text" placeholder="Username" id="message-user-input" data-toggle="add-user-dropdown" style="position: relative;" autocomplete="off">
+                            <div class="dropdown-pane hide grid-x" id="add-user-dropdown" style="width: 50vw; justify-self: stretch;" data-dropdown data-close-on-click="true">
+                                <ul class="cell-12 list-group" id="add-user-dropdown-list" style="padding: none;"></ul>
+                            </div>
+						</div>
+						<div class="cell small-12 large-4">
+							<button type="submit" class="button">Add User</button>
+						</div>
+						<div class="callout alert hide cell small=12" id="no-user-alert">
+							<p>No user with that username.</p>
+						</div>
+						<div class="callout alert hide cell small=12" id="duplicate-user-alert">
+							<p>This user is already a member of {{club.name}}.</p>
+						</div>
+					</form>
 					<div class="align-bottom">
 						<button type="button" class="button" id="changeBookButton" data-open='add-book-modal'>Change Book</button>
 					</div>
